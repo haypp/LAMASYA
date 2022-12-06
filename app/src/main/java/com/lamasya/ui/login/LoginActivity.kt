@@ -52,12 +52,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun getEmailPw() {
         binding.apply {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
+            val email = etEmail.text.toString()
+            val password = etPassword.text.toString()
             if (email.isEmpty() && password.isEmpty() && password.length < 6) {
-                emailEditText.error = "Email tidak boleh kosong"
-                passwordEditText.error = "Password tidak boleh kosong"
-                emailEditText.requestFocus()
+                etEmail.error = "Email tidak boleh kosong"
+                etPassword.error = "Password tidak boleh kosong"
+                etEmail.requestFocus()
             } else {
                 signInEmail(email, password)
             }

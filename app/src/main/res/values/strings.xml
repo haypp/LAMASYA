@@ -20,4 +20,10 @@
     <string name="register">Register</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="go_back">Go back</string>
+    <string name="tittle_weather">Weather</string>
+    <string name="tittle_notification">Notification</string>
+    <string name="LogoTittle">LAMASYA</string>
+    <string name="createTittle">Create account</string>
+    <string name="createTitleDesc">Get the best out of LAMASYA by creating an account</string>
+    <string name="tittleAccept">I accept term and condition</string>
 </resources>

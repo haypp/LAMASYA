@@ -34,22 +34,22 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-        if (binding.checkBox.isChecked){
+        if (binding.cbAccept.isChecked){
             binding.apply {
-                val fname = fnameEditText.text.toString()
-                val lname = lnameEditText.text.toString()
-                val email = emailEditText.text.toString()
-                val password = passwordEditText.text.toString()
-                val phone = phoneEditText.text.toString()
-                val age = ageEditText.text.toString()
+                val fname = etFname.text.toString()
+                val lname = etLname.text.toString()
+                val email = etEmail.text.toString()
+                val password = etPassword.text.toString()
+                val phone = etPhone.text.toString()
+                val age = etAge.text.toString()
                 if (fname.isEmpty() || lname.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty() || age.isEmpty()) {
-                    fnameEditText.error = "First Name tidak boleh kosong"
-                    lnameEditText.error = "Last Name tidak boleh kosong"
-                    phoneEditText.error = "Phone tidak boleh kosong"
-                    ageEditText.error = "Umur tidak boleh kosong"
-                    emailEditText.error = "Email tidak boleh kosong"
-                    passwordEditText.error = "Password tidak boleh kosong"
-                    emailEditText.requestFocus()
+                    etFname.error = "First Name tidak boleh kosong"
+                    etLname.error = "Last Name tidak boleh kosong"
+                    etPhone.error = "Phone tidak boleh kosong"
+                    etAge.error = "Umur tidak boleh kosong"
+                    etEmail.error = "Email tidak boleh kosong"
+                    etPassword.error = "Password tidak boleh kosong"
+                    etEmail.requestFocus()
                     return
                 } else {
                     createAccount(email, password)
