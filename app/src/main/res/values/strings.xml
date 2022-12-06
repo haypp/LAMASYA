@@ -3,4 +3,21 @@
     <string name="title_home">Home</string>
     <string name="title_contact">Contact</string>
     <string name="title_profile">Profile</string>
+    <string name="email">Email</string>
+    <string name="please_choose_your_login_option_below">Please choose your login option below</string>
+    <string name="welcome_to_lamasya">Welcome to Lamasya</string>
+    <string name="password">Password</string>
+    <string name="let_s_explore">Let’s Explore</string>
+    <string name="or_login_with">Or login with</string>
+    <string name="login">Login</string>
+    <string name="image">image</string>
+    <string name="does_not_have_account">Does not have account?</string>
+    <string name="create_account">Create Account</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="phone">Phone</string>
+    <string name="age">Age</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="go_back">Go back</string>
 </resources>

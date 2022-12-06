@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "651652719473",
+    "project_id": "lamasya-dicoding",
+    "storage_bucket": "lamasya-dicoding.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651652719473:android:b975a64384563a74e58cd0",
+        "android_client_info": {
+          "package_name": "com.lamasya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651652719473-lcsjptt4lgklmvv76il27rp2ck765020.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lamasya",
+            "certificate_hash": "66ae4010593b7caff0eaae0a5fe9dab02f54a38c"
+          }
+        },
+        {
+          "client_id": "651652719473-513o0a4asmrd2njl42fjde673ic7j30j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZvMIx0hyaKJnHb-zfFo9ueD42YSQk0Qw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651652719473-513o0a4asmrd2njl42fjde673ic7j30j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
