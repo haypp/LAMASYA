@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.lamasya.MainActivity
+import com.lamasya.ui.main.MainActivity
 import com.lamasya.R
 import com.lamasya.databinding.ActivityLoginBinding
 import com.lamasya.ui.register.RegisterActivity
