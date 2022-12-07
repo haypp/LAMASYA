@@ -26,4 +26,6 @@
     <string name="createTittle">Create account</string>
     <string name="createTitleDesc">Get the best out of LAMASYA by creating an account</string>
     <string name="tittleAccept">I accept term and condition</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

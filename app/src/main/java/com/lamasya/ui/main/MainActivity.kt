@@ -1,4 +1,4 @@
-package com.lamasya
+package com.lamasya.ui.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.lamasya.R
 import com.lamasya.databinding.ActivityMainBinding
 import com.lamasya.ui.login.LoginActivity
 
