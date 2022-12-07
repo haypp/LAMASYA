@@ -26,6 +26,21 @@
     <string name="createTittle">Create account</string>
     <string name="createTitleDesc">Get the best out of LAMASYA by creating an account</string>
     <string name="tittleAccept">I accept term and condition</string>
+    <string name="nama_instansi">RSIA SURYA ABADI PRIGEN</string>
+    <string name="address">Jl. Raya Prigen No.5, Plembon, Kecamatan Prigen</string>
+    <string name="typeRs">Rumah sakit Umum</string>
+    <string name="call">(0343) 882200</string>
+    <string name="buka">Buka 24 Jam</string>
+    <string name="Nama_orang">Kiba Inuzuka</string>
+    <string name="Time">1 Jam Yang Lalu</string>
+    <string name="type_situation">Lalu Lintas</string>
+    <string name="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tellus at mi pretium lacus. Leo erat massa blandit ac commodo. Sed in vitae tristique phasellus. Egestas quis morbi consectetur laoreet eu libero,</string>
+    <string name="contentDesc">Ini adalah gambar untuk content</string>
+    <string name="typeDesc">ini adalah foto content desc type situation</string>
+    <string name="doodDesc">ini adalah icon dood</string>
+    <string name="CallDesc">ini adalah icon telepon</string>
+    <string name="rsDesc">ini adalah icon rumah sakit</string>
+    <string name="locationDesc">ini adalah icon lokasi</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
