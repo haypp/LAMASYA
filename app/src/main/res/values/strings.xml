@@ -62,5 +62,5 @@
     <string name="rsDesc">ini adalah ikon rumah sakit</string>
     <string name="locationDesc">ini adalah ikon rumah sakit</string>
     <string name="google_login">Login with Google</string>
-
+    <string name="search_view_text">Search in All</string>
 </resources>

@@ -13,4 +13,5 @@
     <color name="ganti">#000000</color>
     <color name="gray">#838383</color>
     <color name="orange_200">#FFBC80</color>
+    <color name="search_bar">#EFEEEE</color>
 </resources>
