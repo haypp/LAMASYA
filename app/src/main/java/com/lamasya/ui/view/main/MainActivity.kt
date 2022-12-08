@@ -1,14 +1,10 @@
 package com.lamasya.ui.view.main
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import androidx.fragment.app.Fragment
 import com.lamasya.R
 import com.lamasya.databinding.ActivityMainBinding
-import com.lamasya.ui.view.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,17 +12,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-//        binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//        binding.textView6.text = "${Firebase.auth.currentUser?.email}"
-//        binding.button2.setOnClickListener {
-//            Firebase.auth.signOut()
-//            Toast.makeText(this,"Sign Out",Toast.LENGTH_SHORT).show()
-//            startActivity(Intent(this, LoginActivity::class.java))
-//
-//
-//
-//        }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        replaceFragment(ContactsFragment())
+        binding.bottomBar.onTabSelected = {
+            when (it.id) {
+                R.id.home -> {
+                    replaceFragment(StoryFragment())
+                }
+                R.id.contact -> {
+                    replaceFragment(ContactsFragment())
+                }
+                R.id.profile -> {
+                    replaceFragment(ProfileFragment())
+                }
+            }
+        }
     }
-
+       private fun replaceFragment(fragment : Fragment){
+           val fragmentManager = supportFragmentManager
+           val fragmentTransaction = fragmentManager.beginTransaction()
+           fragmentTransaction.replace(R.id.fragment_container,fragment)
+           fragmentTransaction.commit()
+    }
 }
