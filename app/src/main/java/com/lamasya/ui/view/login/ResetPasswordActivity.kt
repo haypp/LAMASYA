@@ -2,11 +2,11 @@ package com.lamasya.ui.view.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.lamasya.R
 import com.lamasya.databinding.ActivityResetPasswordBinding
 import com.lamasya.ui.viewmodel.ResetPwViewModel
+import com.lamasya.util.toast
 
 class ResetPasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResetPasswordBinding
@@ -29,14 +29,14 @@ class ResetPasswordActivity : AppCompatActivity() {
             resetPwViewModel.resetPassword(email)
             resetPwViewModel.resetpw.observe(this) {
                 if (it) {
-                    Toast.makeText(this, "Email reset password telah dikirim", Toast.LENGTH_SHORT).show()
+                    toast("Email reset password telah dikirim")
                     finish()
                 } else {
-                    Toast.makeText(this, "Email tidak terdaftar", Toast.LENGTH_SHORT).show()
+                    toast("Email tidak terdaftar")
                 }
             }
         } else {
-        Toast.makeText(this, "Email tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            toast("Email tidak boleh kosong")
         }
     }
 }

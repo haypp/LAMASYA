@@ -1,10 +1,8 @@
 package com.lamasya.ui.view.login
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +15,8 @@ import com.lamasya.databinding.ActivityLoginBinding
 import com.lamasya.ui.view.main.MainActivity
 import com.lamasya.ui.view.register.RegisterActivity
 import com.lamasya.ui.viewmodel.LoginViewModel
+import com.lamasya.util.intent
+import com.lamasya.util.toast
 
 
 class LoginActivity : AppCompatActivity() {
@@ -26,7 +26,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
         supportActionBar?.hide()
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -46,10 +45,10 @@ class LoginActivity : AppCompatActivity() {
             getEmailPw()
         }
         binding.btnRegister.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            intent(RegisterActivity::class.java)
         }
         binding.btnForgotPassword.setOnClickListener {
-            startActivity(Intent(this, ResetPasswordActivity::class.java))
+            intent(ResetPasswordActivity::class.java)
         }
     }
 
@@ -76,10 +75,10 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.loginfirebase.observe(this) { user ->
             Log.d("LoginActivity", "cekIsiLiveData: $user")
             if (user != null) {
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                intent(MainActivity::class.java)
                 finish()
             } else {
-                Toast.makeText(this, "Email atau Password salah", Toast.LENGTH_SHORT).show()
+                toast("Email atau Password salah")
             }
         }
     }

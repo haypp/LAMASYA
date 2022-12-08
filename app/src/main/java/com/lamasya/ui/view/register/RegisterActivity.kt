@@ -2,7 +2,6 @@ package com.lamasya.ui.view.register
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
@@ -47,7 +46,6 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
     }
 
     override fun onSuccess(registerResponse: LiveData<RegisterResponse>) {
-        Log.e(this@RegisterActivity.toString(), "ara main succes ${registerResponse.value.toString()}")
         toast(registerResponse.value!!.message)
         intent(MainActivity::class.java)
         finish()
@@ -56,7 +54,6 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
     }
 
     override fun onFailure(registerResponse: LiveData<RegisterResponse>) {
-        Log.e(this@RegisterActivity.toString(), "ara main error ${registerResponse.value.toString()}")
         toast(registerResponse.value!!.message)
     }
 
