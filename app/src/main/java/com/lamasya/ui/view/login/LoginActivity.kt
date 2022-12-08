@@ -10,6 +10,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.lamasya.R
 import com.lamasya.databinding.ActivityLoginBinding
 import com.lamasya.ui.view.main.MainActivity
@@ -72,15 +74,22 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun cekIsiLiveData() {
-        loginViewModel.loginfirebase.observe(this) { user ->
-            Log.d("LoginActivity", "cekIsiLiveData: $user")
-            if (user != null) {
-                intent(MainActivity::class.java)
-                finish()
-            } else {
-                toast(getString(R.string.invalid_email_or_password))
+        val auth = Firebase.auth
+        if (auth.currentUser != null) {
+            intent(MainActivity::class.java)
+            finish()
+        } else {
+            loginViewModel.loginfirebase.observe(this) { user ->
+                Log.d("LoginActivity", "cekIsiLiveData: $user")
+                if (user != null) {
+                    intent(MainActivity::class.java)
+                    finish()
+                } else {
+                    toast(getString(R.string.invalid_email_or_password))
+                }
             }
         }
+
     }
 
     private fun signIn() {
