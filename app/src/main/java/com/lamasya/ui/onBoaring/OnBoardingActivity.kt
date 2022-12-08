@@ -16,10 +16,10 @@ class OnBoardingActivity : AppCompatActivity() {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-        Handler().postDelayed({
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-        }, 3000)
+//        Handler().postDelayed({
+//            startActivity(Intent(this, LoginActivity::class.java))
+//            finish()
+//        }, 3000)
         binding.btnNext.setOnClickListener {
             startActivity(Intent(this,LoginActivity::class.java))
             finish()
