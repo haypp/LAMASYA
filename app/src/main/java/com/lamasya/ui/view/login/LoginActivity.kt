@@ -1,4 +1,4 @@
-package com.lamasya.ui.login
+package com.lamasya.ui.view.login
 
 import android.app.Activity
 import android.content.Intent
@@ -14,8 +14,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.lamasya.R
 import com.lamasya.databinding.ActivityLoginBinding
-import com.lamasya.ui.main.MainActivity
-import com.lamasya.ui.register.RegisterActivity
+import com.lamasya.ui.view.main.MainActivity
+import com.lamasya.ui.view.register.RegisterActivity
+import com.lamasya.ui.viewmodel.LoginViewModel
 
 
 class LoginActivity : AppCompatActivity() {

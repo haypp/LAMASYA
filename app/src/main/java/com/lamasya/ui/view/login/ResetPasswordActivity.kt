@@ -1,13 +1,12 @@
-package com.lamasya.ui.login
+package com.lamasya.ui.view.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.lamasya.R
 import com.lamasya.databinding.ActivityResetPasswordBinding
+import com.lamasya.ui.viewmodel.ResetPwViewModel
 
 class ResetPasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResetPasswordBinding

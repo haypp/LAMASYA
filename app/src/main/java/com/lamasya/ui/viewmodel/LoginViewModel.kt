@@ -1,4 +1,4 @@
-package com.lamasya.ui.login
+package com.lamasya.ui.viewmodel
 
 import android.widget.Toast
 import androidx.lifecycle.LiveData

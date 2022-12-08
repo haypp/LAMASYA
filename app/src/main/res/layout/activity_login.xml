@@ -197,5 +197,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="205dp" />
+
+
+
+    <TextView
+        android:id="@+id/btnForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:text="Forgot Password?"
+        app:layout_constraintBottom_toTopOf="@+id/btnSignInEmail"
+        app:layout_constraintEnd_toEndOf="@+id/PasswordTextInput"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordTextInput" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
