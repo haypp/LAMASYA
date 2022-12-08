@@ -1,4 +1,4 @@
-package com.lamasya.ui.login
+package com.lamasya.ui.view.login
 
 import android.app.Activity
 import android.content.Intent
@@ -16,10 +16,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.lamasya.ui.main.MainActivity
+import com.lamasya.ui.view.main.MainActivity
 import com.lamasya.R
 import com.lamasya.databinding.ActivityLoginBinding
-import com.lamasya.ui.register.RegisterActivity
+import com.lamasya.ui.view.register.RegisterActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

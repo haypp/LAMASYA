@@ -1,46 +1,62 @@
 <resources>
     <string name="app_name">LAMASYA</string>
-    <string name="title_home">Home</string>
-    <string name="title_contact">Contact</string>
-    <string name="title_profile">Profile</string>
-    <string name="email">Email</string>
-    <string name="please_choose_your_login_option_below">Please choose your login option below</string>
+    <string name="type_situation">Lalu Lintas</string>
+
+    <!--    title-->
     <string name="welcome_to_lamasya">Welcome to Lamasya</string>
-    <string name="password">Password</string>
-    <string name="let_s_explore">Let’s Explore</string>
-    <string name="or_login_with">Or login with</string>
-    <string name="login">Login</string>
-    <string name="image">image</string>
-    <string name="does_not_have_account">Does not have account?</string>
-    <string name="create_account">Create Account</string>
-    <string name="last_name">Last Name</string>
-    <string name="first_name">First Name</string>
-    <string name="phone">Phone</string>
-    <string name="age">Age</string>
-    <string name="register">Register</string>
-    <string name="already_have_an_account">Already have an account?</string>
-    <string name="go_back">Go back</string>
-    <string name="tittle_weather">Weather</string>
-    <string name="tittle_notification">Notification</string>
     <string name="LogoTittle">LAMASYA</string>
     <string name="createTittle">Create account</string>
     <string name="createTitleDesc">Get the best out of LAMASYA by creating an account</string>
     <string name="tittleAccept">I accept term and condition</string>
+    <string name="title_home">Home</string>
+    <string name="title_contact">Contact</string>
+    <string name="title_profile">Profile</string>
+    <string name="tittle_weather">Weather</string>
+    <string name="tittle_notification">Notification</string>
+
+    <!--    material-->
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="image">image</string>
+    <string name="phone">Phone</string>
+    <string name="age">Age</string>
+
     <string name="nama_instansi">RSIA SURYA ABADI PRIGEN</string>
+    <string name="Nama_orang">Kiba Inuzuka</string>
     <string name="address">Jl. Raya Prigen No.5, Plembon, Kecamatan Prigen</string>
     <string name="typeRs">Rumah sakit Umum</string>
     <string name="call">(0343) 882200</string>
     <string name="buka">Buka 24 Jam</string>
-    <string name="Nama_orang">Kiba Inuzuka</string>
     <string name="Time">1 Jam Yang Lalu</string>
-    <string name="type_situation">Lalu Lintas</string>
+
+
+    <!--    action-->
+    <string name="login">Login</string>
+    <string name="or_login_with">Or login with</string>
+    <string name="create_account">Create Account</string>
+    <string name="register">Register</string>
+    <string name="go_back">Go back</string>
+    <string name="let_s_explore">Let’s Explore</string>
+    <string name="does_not_have_account">Does not have account?</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="please_choose_your_login_option_below">Please choose your login option below</string>
+    <string name="please_fill_field">Please Fill this Field</string>
+    <string name="invalid_password">Password must be > 6 characters</string>
+
+    <string name="please_accept_term">Please Check Accept Term and Condition</string>
+    <string name="auth_fail">Authectication Failed</string>
+
+
+    <!--    desc-->
     <string name="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tellus at mi pretium lacus. Leo erat massa blandit ac commodo. Sed in vitae tristique phasellus. Egestas quis morbi consectetur laoreet eu libero,</string>
     <string name="contentDesc">Ini adalah gambar untuk content</string>
     <string name="typeDesc">ini adalah foto content desc type situation</string>
-    <string name="doodDesc">ini adalah icon dood</string>
-    <string name="CallDesc">ini adalah icon telepon</string>
-    <string name="rsDesc">ini adalah icon rumah sakit</string>
-    <string name="locationDesc">ini adalah icon lokasi</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="doodDesc">this is dood icon</string>
+    <string name="CallDesc">this is phone icon</string>
+    <string name="rsDesc">this is hospital icon</string>
+    <string name="locationDesc">this is location icon</string>
+    <string name="google_login">Login with Google</string>
+
 </resources>
