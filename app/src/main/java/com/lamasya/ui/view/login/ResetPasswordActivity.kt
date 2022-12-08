@@ -29,14 +29,14 @@ class ResetPasswordActivity : AppCompatActivity() {
             resetPwViewModel.resetPassword(email)
             resetPwViewModel.resetpw.observe(this) {
                 if (it) {
-                    toast("Email reset password telah dikirim")
+                    toast(getString(R.string.password_request_has_been_sent))
                     finish()
                 } else {
-                    toast("Email tidak terdaftar")
+                    toast(getString(R.string.email_not_found))
                 }
             }
         } else {
-            toast("Email tidak boleh kosong")
+            toast(getString(R.string.email_cant_null))
         }
     }
 }

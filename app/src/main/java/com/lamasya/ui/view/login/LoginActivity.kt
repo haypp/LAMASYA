@@ -57,8 +57,8 @@ class LoginActivity : AppCompatActivity() {
             val email = etEmail.text.toString()
             val password = etPassword.text.toString()
             if (email.isEmpty() || password.isEmpty() || password.length < 6) {
-                etEmail.error = "Email tidak boleh kosong"
-                etPassword.error = "Password tidak boleh kosong"
+                etEmail.error = getString(R.string.please_fill_field)
+                etPassword.error = getString(R.string.invalid_password)
                 etEmail.requestFocus()
             } else {
                 signInEmail(email, password)
@@ -78,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
                 intent(MainActivity::class.java)
                 finish()
             } else {
-                toast("Email atau Password salah")
+                toast(getString(R.string.invalid_email_or_password))
             }
         }
     }
