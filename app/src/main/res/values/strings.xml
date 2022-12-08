@@ -1,13 +1,5 @@
 <resources>
     <string name="app_name">LAMASYA</string>
-    <string name="type_situation">Lalu Lintas</string>
-
-    <!--    title-->
-    <string name="welcome_to_lamasya">Welcome to Lamasya</string>
-    <string name="LogoTittle">LAMASYA</string>
-    <string name="createTittle">Create account</string>
-    <string name="createTitleDesc">Get the best out of LAMASYA by creating an account</string>
-    <string name="tittleAccept">I accept term and condition</string>
     <string name="title_home">Home</string>
     <string name="title_contact">Contact</string>
     <string name="title_profile">Profile</string>
@@ -47,6 +39,7 @@
 
     <string name="please_accept_term">Please Check Accept Term and Condition</string>
     <string name="auth_fail">Authectication Failed</string>
+    <string name="send_email">Send Email</string>
 
 
     <!--    desc-->
