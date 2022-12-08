@@ -16,29 +16,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-<<<<<<< Updated upstream
 //        binding = ActivityMainBinding.inflate(layoutInflater)
 //        setContentView(binding.root)
-=======
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
->>>>>>> Stashed changes
 //        binding.textView6.text = "${Firebase.auth.currentUser?.email}"
 //        binding.button2.setOnClickListener {
 //            Firebase.auth.signOut()
 //            Toast.makeText(this,"Sign Out",Toast.LENGTH_SHORT).show()
 //            startActivity(Intent(this, LoginActivity::class.java))
-<<<<<<< Updated upstream
 //
 //
 //
 //        }
-=======
-
-
-
-        }
->>>>>>> Stashed changes
     }
 
-//}
+}
