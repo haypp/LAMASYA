@@ -1,4 +1,4 @@
-package com.lamasya.ui.main
+package com.lamasya.ui.view.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
