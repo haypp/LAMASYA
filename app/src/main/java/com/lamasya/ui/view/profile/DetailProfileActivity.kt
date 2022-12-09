@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lamasya.R
 import com.lamasya.data.model.MenuDetailProfileModel
 import com.lamasya.data.remote.profile.ProfileResponse
@@ -15,8 +16,11 @@ import com.lamasya.ui.auth.ProfileAuth
 import com.lamasya.ui.view.main.MainActivity
 import com.lamasya.ui.viewmodel.ProfileViewModel
 import com.lamasya.util.logE
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 
-class DetailProfileActivity : AppCompatActivity(), ProfileAuth {
+class DetailProfileActivity : AppCompatActivity(), ProfileAuth, SwipeRefreshLayout.OnRefreshListener  {
     private lateinit var binding: ActivityDetailProfileBinding
     private val profileVM: ProfileViewModel by viewModels()
     private val itemList = ArrayList<MenuDetailProfileModel>()
@@ -27,10 +31,14 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth {
         setContentView(binding.root)
 
         profileVM.profileAuth = this
-        getProfileData()
+        onRefresh()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.tittle_detail_profile)
+
+        binding.swpRefreshDetailProfile.setOnRefreshListener{
+            onRefresh()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -40,6 +48,16 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth {
 
     override fun onSuccess(profileResponse: LiveData<ProfileResponse>) {
         addItem(profileResponse)
+    }
+
+    override fun onRefresh() {
+        binding.apply {
+            swpRefreshDetailProfile.isRefreshing = true
+            Timer().schedule(2000) {
+                swpRefreshDetailProfile.isRefreshing = false
+                getProfileData()
+            }
+        }
     }
 
     private fun getProfileData() {

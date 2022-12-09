@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.lamasya.R
 import com.lamasya.data.model.MenuProfileModel
 import com.lamasya.data.remote.profile.ProfileResponse
@@ -16,8 +17,11 @@ import com.lamasya.ui.adapter.ProfileMenuAdapter
 import com.lamasya.ui.auth.ProfileAuth
 import com.lamasya.ui.viewmodel.ProfileViewModel
 import com.lamasya.util.logE
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 
-class ProfileFragment : Fragment(), ProfileAuth {
+class ProfileFragment : Fragment(), ProfileAuth, SwipeRefreshLayout.OnRefreshListener  {
     private lateinit var binding: FragmentProfileBinding
     private val itemList = ArrayList<MenuProfileModel>()
 
@@ -36,14 +40,30 @@ class ProfileFragment : Fragment(), ProfileAuth {
         super.onViewCreated(view, savedInstanceState)
         profileVM.profileAuth = this
         addItem()
-        getProfileData()
-        binding.rvListMenuProfile.setHasFixedSize(true)
+        onRefresh()
+
+        binding.apply {
+            rvListMenuProfile.setHasFixedSize(true)
+            swpRefreshProfile.setOnRefreshListener {
+                onRefresh()
+            }
+        }
     }
 
     override fun onSuccess(profileResponse: LiveData<ProfileResponse>) {
         binding.tvDetailName.text =
             StringBuilder(profileResponse.value?.first_name.toString()).append(" ")
                 .append(profileResponse.value?.last_name.toString())
+    }
+
+    override fun onRefresh() {
+        binding.apply {
+            swpRefreshProfile.isRefreshing = true
+            Timer().schedule(2000) {
+                swpRefreshProfile.isRefreshing = false
+                getProfileData()
+            }
+        }
     }
 
     private fun getProfileData() {
