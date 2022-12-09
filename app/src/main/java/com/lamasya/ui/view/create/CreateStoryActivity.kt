@@ -7,13 +7,24 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.lamasya.databinding.ActivityCreateStoryBinding
 import com.lamasya.ui.view.camera.CameraActivity
+import com.lamasya.ui.view.main.MainActivity
+import com.lamasya.util.logE
 import com.lamasya.util.rotateBitmap
 import com.lamasya.util.uriToFile
 import java.io.*
@@ -21,12 +32,10 @@ import java.io.*
 @Suppress("DEPRECATION")
 class CreateStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateStoryBinding
-
-    companion object {
-        const val CAMERA_X_RESULT = 200
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
-        private const val REQUEST_CODE_PERMISSIONS = 10
-    }
+    private lateinit var storageRef: StorageReference
+    private lateinit var firebaseFirestore: FirebaseFirestore
+    private lateinit var firebaseauth: FirebaseAuth
+    private var imageUri: Uri? = null
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -46,10 +55,6 @@ class CreateStoryActivity : AppCompatActivity() {
         }
     }
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateStoryBinding.inflate(layoutInflater)
@@ -62,10 +67,32 @@ class CreateStoryActivity : AppCompatActivity() {
                 REQUEST_CODE_PERMISSIONS
             )
         }
+        initVars()
+        registerClickEvents()
+        getnama()
+    }
 
+    private fun getnama() {
+        val currentUID = MainActivity.CURRENT_UID
+        firebaseFirestore.collection("detail_user").document(currentUID).get()
+            .addOnSuccessListener { documents ->
+                val fnama = documents.getString("first_name")
+                val lname = documents.getString("last_name")
+                binding.tvNama.text = "$fnama $lname"
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Error getting documents: ", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun registerClickEvents() {
         binding.btnCamera.setOnClickListener { startCamera() }
         binding.btnGallery.setOnClickListener {startGallery() }
         binding.btnUpload.setOnClickListener { uploadImage() }
+    }
+
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun startCamera() {
@@ -83,7 +110,37 @@ class CreateStoryActivity : AppCompatActivity() {
 
 
     private fun uploadImage() {
-        Toast.makeText(this, "Fitur ini belum tersedia", Toast.LENGTH_SHORT).show()
+        val uid = firebaseauth.currentUser?.uid
+        val desc = binding.edDescription.text.toString()
+        val situation = binding.situation.selectedItem.toString()
+        val name = binding.tvNama.text.toString()
+
+        storageRef = storageRef.child(System.currentTimeMillis().toString())
+        imageUri?.let {
+            storageRef.putFile(it).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    storageRef.downloadUrl.addOnSuccessListener { uri ->
+                        val map = hashMapOf(
+                            "uid" to uid,
+                            "pic" to uri.toString(),
+                            "desc" to desc,
+                            "situation" to situation,
+                            "nama" to name
+                        )
+                        firebaseFirestore.collection("stories")
+                            .add(map).addOnCompleteListener { firestoreTask ->
+                            if (firestoreTask.isSuccessful){
+                                Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show()
+                            }else{
+                                Toast.makeText(this, firestoreTask.exception?.message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private val launcherIntentCameraX = registerForActivityResult(
@@ -97,7 +154,7 @@ class CreateStoryActivity : AppCompatActivity() {
                 BitmapFactory.decodeFile(myFile.path),
                 isBackCamera
             )
-
+            imageUri = myFile.toUri()
             binding.previewImageView.setImageBitmap(result)
         }
     }
@@ -107,9 +164,18 @@ class CreateStoryActivity : AppCompatActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedImg: Uri = result.data?.data as Uri
-            val myFile = uriToFile(selectedImg, this@CreateStoryActivity)
+            imageUri = selectedImg
             binding.previewImageView.setImageURI(selectedImg)
         }
     }
-
+    private fun initVars() {
+        storageRef = FirebaseStorage.getInstance().reference.child("Images")
+        firebaseFirestore = FirebaseFirestore.getInstance()
+        firebaseauth = Firebase.auth
+    }
+    companion object {
+        const val CAMERA_X_RESULT = 200
+        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private const val REQUEST_CODE_PERMISSIONS = 10
+    }
 }

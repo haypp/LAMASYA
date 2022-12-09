@@ -1,6 +1,5 @@
 package com.lamasya.ui.viewmodel
 
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,8 +11,8 @@ import com.google.firebase.ktx.Firebase
 
 
 class LoginViewModel : ViewModel() {
-    private var _loginfirebase = MutableLiveData<FirebaseUser>()
-    val loginfirebase: LiveData<FirebaseUser> = _loginfirebase
+    private var _loginfirebase = MutableLiveData<FirebaseUser?>()
+    val loginfirebase: LiveData<FirebaseUser?> = _loginfirebase
 
     fun loginEmail(email: String, password: String) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
