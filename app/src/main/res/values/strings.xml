@@ -8,14 +8,15 @@
 
     <!--    material-->
     <string name="welcome_to_lamasya">Selamat Datang di Lamasya</string>
-    <string name="last_name">Nama Depan</string>
-    <string name="first_name">Nama Belakang</string>
+    <string name="first_name">Nama Depan</string>
+    <string name="last_name">Nama Belakang</string>
     <string name="email">Email</string>
     <string name="password">Kata Sandi</string>
     <string name="image">gambar</string>
     <string name="phone">No Telepon</string>
     <string name="age">Umur</string>
     <string name="type_situation">Tipe Situasi</string>
+    <string name="title">Title</string>
 
     <string name="nama_instansi">RSIA SURYA ABADI PRIGEN</string>
     <string name="Nama_orang">Kiba Inuzuka</string>
@@ -35,6 +36,7 @@
     <string name="does_not_have_account">Belum Punya akun?</string>
     <string name="invalid_email_or_password">Email atau Password salah</string>
     <string name="email_not_found">Email tidak terdaftar</string>
+    <string name="forgot_password">Lupa Password</string>
     <string name="register">Daftar</string>
 
     <string name="createTittle">Buat Akun</string>
@@ -63,4 +65,6 @@
     <string name="locationDesc">ini adalah ikon rumah sakit</string>
     <string name="google_login">Login with Google</string>
     <string name="search_view_text">Search in All</string>
+
+    <string name="photo_profile">ini adalah foto profile pribadi</string>
 </resources>

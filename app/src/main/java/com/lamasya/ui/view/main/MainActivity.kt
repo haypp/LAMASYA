@@ -10,10 +10,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+//        binding.textView6.text = "${Firebase.auth.currentUser?.email}"
+//        binding.button2.setOnClickListener {
+//            Firebase.auth.signOut()
+//            Toast.makeText(this,"Sign Out",Toast.LENGTH_SHORT).show()
+//            startActivity(Intent(this, LoginActivity::class.java))
+//
+//
+//
+//        }
+
         replaceFragment(ContactsFragment())
         binding.bottomBar.onTabSelected = {
             when (it.id) {
@@ -29,10 +38,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-       private fun replaceFragment(fragment : Fragment){
-           val fragmentManager = supportFragmentManager
-           val fragmentTransaction = fragmentManager.beginTransaction()
-           fragmentTransaction.replace(R.id.fragment_container,fragment)
-           fragmentTransaction.commit()
+    private fun replaceFragment(fragment : Fragment){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container,fragment)
+        fragmentTransaction.commit()
     }
+
 }
