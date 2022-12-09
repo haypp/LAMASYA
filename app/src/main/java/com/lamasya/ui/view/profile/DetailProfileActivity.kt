@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lamasya.R
 import com.lamasya.data.model.MenuDetailProfileModel
 import com.lamasya.data.remote.profile.ProfileResponse
 import com.lamasya.databinding.ActivityDetailProfileBinding
@@ -29,6 +30,7 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth {
         getProfileData()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.tittle_detail_profile)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -46,13 +48,14 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth {
     }
 
     private fun addItem(profileResponse: LiveData<ProfileResponse>) {
+        val dataProfile = profileResponse.value
         val dataListItem = arrayOf(
-            StringBuilder(profileResponse.value?.first_name.toString()).append(" ")
-                .append(profileResponse.value?.last_name.toString()).toString(),
-            StringBuilder(profileResponse.value?.email.toString()).toString(),
-            StringBuilder(profileResponse.value?.phone.toString()).toString(),
-            profileResponse.value?.gender.toString(),
-            profileResponse.value?.age.toString()
+            StringBuilder(dataProfile?.first_name.toString()).append(" ")
+                .append(dataProfile?.last_name.toString()).toString(),
+            StringBuilder(dataProfile?.email.toString()).toString(),
+            StringBuilder(dataProfile?.phone.toString()).toString(),
+            dataProfile?.gender.toString(),
+            dataProfile?.age.toString()
         )
 
         itemList.clear()

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.view.profile.ChangeDetailProfileActivity"
-    android:layout_margin="25dp">
+    android:layout_margin="25dp"
+    tools:context=".ui.view.profile.ChangeDetailProfileActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/FnametextUpdate"
@@ -91,8 +91,30 @@
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/EmailTextUpdate"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="26dp"
+        android:enabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AgeTextUpdate"
+        app:startIconDrawable="@drawable/ic_baseline_email_24">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_edit_email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
-        android:id="@+id/tv_gender_desc"
+        android:id="@+id/tv_update_gender_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
@@ -101,7 +123,7 @@
         android:text="@string/gender"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/AgeTextUpdate" />
+        app:layout_constraintTop_toBottomOf="@id/EmailTextUpdate" />
 
     <RadioGroup
         android:id="@+id/rgUpdateGender"
@@ -110,7 +132,7 @@
         android:layout_marginHorizontal="26dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_gender_desc">
+        app:layout_constraintTop_toBottomOf="@+id/tv_update_gender_desc">
 
         <RadioButton
             android:id="@+id/rbUpdateMale"

@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.lamasya.data.remote.profile.ProfileRequest
 import com.lamasya.data.remote.profile.ProfileResponse
 import com.lamasya.ui.auth.ProfileAuth
 import kotlinx.coroutines.launch
@@ -17,18 +18,29 @@ class ProfileViewModel : ViewModel() {
     var profileAuth: ProfileAuth? = null
 
     fun getProfile(currentUID: String) = viewModelScope.launch {
-        firestore.collection("detail_user").whereEqualTo("uid", currentUID)
+        firestore.collection("detail_user").document(currentUID)
             .get()
             .addOnSuccessListener {
                 mutableProfileResponse.value = ProfileResponse(
-                    it.documents[0].data!!["first_name"].toString(),
-                    it.documents[0].data!!["last_name"].toString(),
+                    it.data!!["first_name"].toString(),
+                    it.data!!["last_name"].toString(),
                     FirebaseAuth.getInstance().currentUser?.email.toString(),
-                    it.documents[0].data!!["phone"].toString(),
-                    it.documents[0].data!!["gender"].toString(),
-                    Integer.valueOf(it.documents[0].data!!["age"].toString())
+                    it.data!!["phone"].toString(),
+                    it.data!!["gender"].toString(),
+                    Integer.valueOf(it.data!!["age"].toString())
                 )
                 profileAuth?.onSuccess(liveDataProfileResponse)
             }
+
+    }
+
+    fun updateProfile(profileRequest: ProfileRequest) = viewModelScope.launch {
+        firestore.collection("detail_user").document(profileRequest.user_Id).update(
+            "first_name", profileRequest.first_name,
+            "last_name", profileRequest.last_name,
+            "phone", profileRequest.phone,
+            "age", profileRequest.age,
+            "gender", profileRequest.gender
+        )
     }
 }

@@ -1,5 +1,6 @@
 package com.lamasya.ui.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.lamasya.R
 import com.lamasya.data.model.MenuDetailProfileModel
-
+import com.lamasya.ui.view.profile.ChangeDetailProfileActivity
 
 class DetailProfileMenuAdapter(private val itemList: ArrayList<MenuDetailProfileModel>) :
     RecyclerView.Adapter<DetailProfileMenuAdapter.ViewHolder>() {
@@ -33,21 +34,11 @@ class DetailProfileMenuAdapter(private val itemList: ArrayList<MenuDetailProfile
         }
 
         viewHolder.itemView.setOnClickListener{
-//            val context = viewHolder.itemView.context
-//            when (position) {
-//                0 -> {
-//                    context.intent(DetailProfileActivity::class.java)
-//                }
-//                1 -> {
-//                    context.intent(ChangePasswordActivity::class.java)
-//                }
-//                2 -> {
-//                    FirebaseAuth.getInstance().signOut()
-//                    context.intent(LoginActivity::class.java)
-//                    (context as Activity).finish()
-//
-//                }
-//            }
+            val context = viewHolder.itemView.context
+            val move = Intent(context, ChangeDetailProfileActivity::class.java)
+            move.putExtra(ChangeDetailProfileActivity.EXTRA_ITEM, itemList[position].title)
+
+            context.startActivity(move)
         }
     }
 

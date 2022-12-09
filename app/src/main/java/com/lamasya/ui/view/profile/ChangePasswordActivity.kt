@@ -10,6 +10,7 @@ class ChangePasswordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_password)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.tittle_change_password)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

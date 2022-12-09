@@ -35,7 +35,6 @@ class RegisterViewModel : ViewModel() {
 
     private fun saveDataFireStore(registerRequest: RegisterRequest) {
         val data = hashMapOf(
-            "uid" to firebaseauth.currentUser!!.uid,
             "first_name" to registerRequest.first_name,
             "last_name" to registerRequest.last_name,
             "phone" to registerRequest.phone,
@@ -44,10 +43,10 @@ class RegisterViewModel : ViewModel() {
         )
 
         firestore.collection("detail_user")
-            .add(data)
+            .document(firebaseauth.currentUser!!.uid).set(data)
             .addOnSuccessListener {
                 mutableRegisterResponse.value = RegisterResponse("Register Successful")
-                userAuth?.onFailure(liveDataRegisterResponse)
+                userAuth?.onSuccess(liveDataRegisterResponse)
             }
             .addOnFailureListener { e ->
                 mutableRegisterResponse.value = RegisterResponse(StringBuilder(e.message.toString()).toString())
