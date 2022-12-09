@@ -1,7 +1,7 @@
 package com.lamasya.ui.auth
 
 import androidx.lifecycle.LiveData
-import com.lamasya.data.remote.Register.RegisterResponse
+import com.lamasya.data.remote.register.RegisterResponse
 
 interface UserAuth {
     fun onSuccess(registerResponse: LiveData<RegisterResponse>)

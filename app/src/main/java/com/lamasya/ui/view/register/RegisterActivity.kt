@@ -10,8 +10,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.lamasya.ui.view.main.MainActivity
 import com.lamasya.R
-import com.lamasya.data.remote.Register.RegisterRequest
-import com.lamasya.data.remote.Register.RegisterResponse
+import com.lamasya.data.remote.register.RegisterRequest
+import com.lamasya.data.remote.register.RegisterResponse
 import com.lamasya.databinding.ActivityRegisterBinding
 import com.lamasya.ui.auth.UserAuth
 import com.lamasya.ui.view.login.LoginActivity

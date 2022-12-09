@@ -5,8 +5,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.lamasya.data.remote.Register.RegisterRequest
-import com.lamasya.data.remote.Register.RegisterResponse
+import com.lamasya.data.remote.register.RegisterRequest
+import com.lamasya.data.remote.register.RegisterResponse
 import com.lamasya.ui.auth.UserAuth
 import kotlinx.coroutines.launch
 

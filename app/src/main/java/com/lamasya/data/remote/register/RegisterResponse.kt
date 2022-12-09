@@ -1,4 +1,4 @@
-package com.lamasya.data.remote.Register
+package com.lamasya.data.remote.register
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
