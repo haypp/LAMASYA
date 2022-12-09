@@ -17,6 +17,7 @@ import com.lamasya.ui.auth.UserAuth
 import com.lamasya.ui.view.login.LoginActivity
 import com.lamasya.ui.viewmodel.RegisterViewModel
 import com.lamasya.util.intent
+import com.lamasya.util.logE
 import com.lamasya.util.toast
 
 class RegisterActivity : AppCompatActivity(), UserAuth {
@@ -73,6 +74,10 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
                     etPhone.error = getString(R.string.please_fill_field)
                     validForm = false
                 }
+                if (GENDER == "") {
+                    toast(getString(R.string.gender_option_null))
+                    validForm = false
+                }
                 if (AGE == 0) {
                     etAge.error = getString(R.string.please_fill_field)
                     validForm = false
@@ -93,15 +98,17 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
         }
     }
     private fun createAccount(validForm: Boolean) {
+        logE("ara gender $GENDER")
         if(validForm){
             registerVM.register(
                 RegisterRequest(
                     FNAME,
                     LNAME,
+                    PHONE,
+                    AGE,
                     EMAIL,
                     PASSWORD,
-                    PHONE,
-                    AGE
+                    GENDER
                 )
             )
         }
@@ -112,14 +119,24 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
         binding.apply {
             FNAME = etFname.text.toString()
             LNAME = etLname.text.toString()
+            PHONE = etPhone.text.toString()
             EMAIL = etEmail.text.toString()
             PASSWORD = etPassword.text.toString()
-            PHONE = etPhone.text.toString()
 
             AGE = if(etAge.text.isNullOrEmpty()){
                 0
             } else{
                 Integer.valueOf(etAge.text.toString())
+            }
+
+            GENDER = if(rbSignUpMale.isChecked){
+                getString(R.string.male)
+            }
+            else if (rbSignUpFemale.isChecked){
+                getString(R.string.female)
+            }
+            else{
+                ""
             }
 
         }
@@ -128,10 +145,11 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
     companion object {
         private var FNAME = ""
         private var LNAME = ""
-        private var EMAIL = ""
-        private var PASSWORD = ""
         private var PHONE = ""
         private var AGE = 0
+        private var EMAIL = ""
+        private var PASSWORD = ""
+        private var GENDER = ""
     }
 
 }

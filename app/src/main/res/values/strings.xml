@@ -13,6 +13,9 @@
     <string name="email">Email</string>
     <string name="password">Kata Sandi</string>
     <string name="image">gambar</string>
+    <string name="gender">jenis kelamin</string>
+    <string name="male">Laki - Laki</string>
+    <string name="female">Perempuan</string>
     <string name="phone">No Telepon</string>
     <string name="age">Umur</string>
     <string name="type_situation">Tipe Situasi</string>
@@ -49,10 +52,13 @@
     <string name="email_cant_null">Email tidak boleh kosong</string>
     <string name="please_accept_term">Mohon ceklist Syarat dan Ketentuan</string>
     <string name="auth_fail">Autentikasi Gagal</string>
+    <string name="gender_option_null">Mohon pilih jenis kelamin</string>
 
     <string name="tittleAccept">Saya menerima syarat dan ketentuan</string>
     <string name="password_request_has_been_sent">"Email reset password telah dikirim"</string>
     <string name="send_email">kirim Email</string>
+
+    <string name="info_Profile">Info Profil</string>
 
 
     <!--    desc-->

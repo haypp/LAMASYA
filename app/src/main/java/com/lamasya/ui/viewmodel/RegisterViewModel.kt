@@ -39,7 +39,8 @@ class RegisterViewModel : ViewModel() {
             "first_name" to registerRequest.first_name,
             "last_name" to registerRequest.last_name,
             "phone" to registerRequest.phone,
-            "age" to registerRequest.age
+            "age" to registerRequest.age,
+            "gender" to registerRequest.gender
         )
 
         firestore.collection("detail_user")

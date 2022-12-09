@@ -1,5 +1,6 @@
 package com.lamasya.ui.adapter
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,12 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.lamasya.R
 import com.lamasya.data.model.MenuProfileModel
+import com.lamasya.ui.view.login.LoginActivity
 import com.lamasya.ui.view.profile.ChangePasswordActivity
 import com.lamasya.ui.view.profile.DetailProfileActivity
 import com.lamasya.util.intent
-import com.lamasya.util.toast
 
 
 class ProfileMenuAdapter(private val itemList: ArrayList<MenuProfileModel>) :
@@ -49,7 +51,10 @@ class ProfileMenuAdapter(private val itemList: ArrayList<MenuProfileModel>) :
                     context.intent(ChangePasswordActivity::class.java)
                 }
                 2 -> {
-                    context.toast("ntar cuyy")
+                    FirebaseAuth.getInstance().signOut()
+                    context.intent(LoginActivity::class.java)
+                    (context as Activity).finish()
+
                 }
             }
         }

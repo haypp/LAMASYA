@@ -13,8 +13,14 @@ data class ProfileResponse(
     @SerializedName("last_name")
     var last_name: String,
 
+    @SerializedName("email")
+    var email: String,
+
     @SerializedName("phone")
     var phone: String,
+
+    @SerializedName("gender")
+    var gender: String,
 
     @SerializedName("age")
     var age: Int,

@@ -1,6 +1,7 @@
 package com.lamasya.ui.viewmodel
 
 import androidx.lifecycle.*
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.lamasya.data.remote.profile.ProfileResponse
@@ -22,7 +23,9 @@ class ProfileViewModel : ViewModel() {
                 mutableProfileResponse.value = ProfileResponse(
                     it.documents[0].data!!["first_name"].toString(),
                     it.documents[0].data!!["last_name"].toString(),
+                    FirebaseAuth.getInstance().currentUser?.email.toString(),
                     it.documents[0].data!!["phone"].toString(),
+                    it.documents[0].data!!["gender"].toString(),
                     Integer.valueOf(it.documents[0].data!!["age"].toString())
                 )
                 profileAuth?.onSuccess(liveDataProfileResponse)

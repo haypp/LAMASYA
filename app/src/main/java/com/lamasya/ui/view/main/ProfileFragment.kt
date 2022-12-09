@@ -40,6 +40,12 @@ class ProfileFragment : Fragment(), ProfileAuth {
         binding.rvListMenuProfile.setHasFixedSize(true)
     }
 
+    override fun onSuccess(profileResponse: LiveData<ProfileResponse>) {
+        binding.tvDetailName.text =
+            StringBuilder(profileResponse.value?.first_name.toString()).append(" ")
+                .append(profileResponse.value?.last_name.toString())
+    }
+
     private fun getProfileData() {
         val currentUID = MainActivity.CURRENT_UID
         context?.logE("ara ID profile fragment $currentUID")
@@ -78,9 +84,4 @@ class ProfileFragment : Fragment(), ProfileAuth {
         private val titleListItem = arrayOf("Detail Profile", "Ubah Password", "Keluar Akun")
     }
 
-    override fun onSuccess(profileResponse: LiveData<ProfileResponse>) {
-        binding.tvDetailName.text =
-            StringBuilder(profileResponse.value?.first_name.toString()).append(" ")
-                .append(profileResponse.value?.last_name.toString())
-    }
 }
