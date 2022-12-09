@@ -6,6 +6,12 @@
     <string name="tittle_weather">Cuaca</string>
     <string name="tittle_notification">Notification</string>
 
+    <string-array name="situation">
+        <item>lalu lintas</item>
+        <item>bencana alam</item>
+        <item>kesehatan</item>
+    </string-array>
+
     <!--    material-->
     <string name="welcome_to_lamasya">Selamat Datang di Lamasya</string>
     <string name="first_name">Nama Depan</string>
@@ -73,4 +79,17 @@
     <string name="search_view_text">Search in All</string>
 
     <string name="photo_profile">ini adalah foto profile pribadi</string>
+
+
+    <!-- Camera -->
+    <string name="switchCamera">Ganti Kamera</string>
+    <string name="captureImage">Ambil Gambar</string>
+    <string name="failedTakePic">Gagal mengambil gambar</string>
+    <string name="failShowCamera">Gagal menampilkan kamera</string>
+    <string name="hintDescription">Apa Yang sedang terjadi</string>
+    <string name="galeriDesc">Tambahkan Foto lewat galeri</string>
+    <string name="cameraDesc">Tambahkan Foto lewat kamera</string>
+    <string name="posting">Posting</string>
+    <string name="no_photo">tidak ada photo</string>
+
 </resources>
