@@ -102,6 +102,7 @@
         <item>kesehatan</item>
     </string-array>
 
+    <string name="rumah_sakit">Rumah Sakit</string>
+    <string name="polisi">Polisi</string>
+    <string name="damkar">Pemadam Kebakaran</string>
 </resources>
-
-
