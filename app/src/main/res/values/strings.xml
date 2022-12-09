@@ -28,17 +28,19 @@
 
     <!--    action-->
     <string name="login">Masuk</string>
-    <string name="let_s_explore">Let’s Explore</string>
+    <string name="let_s_explore">Mulai Sekarang</string>
     <string name="or_login_with">Atau Login menggunakan</string>
     <string name="please_choose_your_login_option_below">Mohon pilih opsi Masuk Akun</string>
     <string name="create_account">Buat Akun</string>
     <string name="does_not_have_account">Belum Punya akun?</string>
     <string name="invalid_email_or_password">Email atau Password salah</string>
     <string name="email_not_found">Email tidak terdaftar</string>
+    <string name="google_login">Login dengan Google</string>
+    <string name="forgot_password">Lupa Password</string>>
     <string name="register">Daftar</string>
 
     <string name="createTittle">Buat Akun</string>
-    <string name="createTitleDesc">Dapatkan fitur terbaik LAMASYA dengan membuat akun</string>
+    <string name="createTitleDesc">Dapatkan fitur terbaik LAMASYA dengan \nmembuat akun</string>
     <string name="already_have_an_account">Sudah Punya akun?</string>
 
     <string name="go_back">Kembali</string>
@@ -61,6 +63,5 @@
     <string name="CallDesc">ini adalah ikon phone</string>
     <string name="rsDesc">ini adalah ikon rumah sakit</string>
     <string name="locationDesc">ini adalah ikon rumah sakit</string>
-    <string name="google_login">Login with Google</string>
 
 </resources>

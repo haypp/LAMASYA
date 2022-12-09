@@ -100,42 +100,46 @@
             android:text="@string/login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PasswordTextInput" />
+            app:layout_constraintTop_toBottomOf="@+id/btnForgotPassword" />
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="110dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="28dp"
-            android:background="@color/ganti"
-            app:layout_constraintEnd_toStartOf="@+id/textView8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline5" />
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="110dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="30dp"
-            android:background="@color/ganti"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.423"
-            app:layout_constraintStart_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toTopOf="@+id/guideline5" />
-
-        <TextView
-            android:id="@+id/textView8"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_atau"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:fontFamily="@font/poppins"
-            android:text="@string/or_login_with"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="15dp"
+
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline5" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnSignInEmail">
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="2dp"
+                android:background="@color/teal_700"
+                app:layout_constraintBottom_toBottomOf="@id/tv_login_or"
+                app:layout_constraintEnd_toStartOf="@id/tv_login_or"
+                app:layout_constraintTop_toTopOf="@id/tv_login_or" />
+
+            <TextView
+                android:id="@+id/tv_login_or"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                android:text="@string/or_login_with"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <View
+                android:layout_width="100dp"
+                android:layout_height="2dp"
+                android:background="@color/teal_700"
+                app:layout_constraintBottom_toBottomOf="@id/tv_login_or"
+                app:layout_constraintStart_toEndOf="@id/tv_login_or"
+                app:layout_constraintTop_toTopOf="@id/tv_login_or" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/textView12"
@@ -187,9 +191,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:contentDescription="@drawable/google_button"
-            app:layout_constraintEnd_toEndOf="@+id/textView8"
-            app:layout_constraintStart_toStartOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintEnd_toEndOf="@+id/ly_atau"
+            app:layout_constraintStart_toStartOf="@+id/ly_atau"
+            app:layout_constraintTop_toBottomOf="@+id/ly_atau" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
@@ -199,18 +203,17 @@
             app:layout_constraintGuide_begin="205dp" />
 
 
-
-    <TextView
-        android:id="@+id/btnForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginBottom="12dp"
-        android:fontFamily="@font/poppins_semi_bold"
-        android:text="Forgot Password?"
-        app:layout_constraintBottom_toTopOf="@+id/btnSignInEmail"
-        app:layout_constraintEnd_toEndOf="@+id/PasswordTextInput"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordTextInput" />
+        <TextView
+            android:id="@+id/btnForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:text="@string/forgot_password"
+            app:layout_constraintBottom_toTopOf="@+id/btnSignInEmail"
+            app:layout_constraintEnd_toEndOf="@+id/PasswordTextInput"
+            app:layout_constraintTop_toBottomOf="@+id/PasswordTextInput" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
