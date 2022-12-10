@@ -1,6 +1,5 @@
 package com.lamasya.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +11,15 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.lamasya.R
 import com.lamasya.data.remote.story.Storyresponse
 
-class StoryAdapter(private val data: ArrayList<Storyresponse>)
-    : RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
+class StoryAdapter(private val data: ArrayList<Storyresponse>) :
+    RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_story, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (_, pic, situation, desc,nama) = data[position]
+        val (_, pic, situation, desc, nama) = data[position]
         holder.apply {
             tvName.text = nama
             tvSituation.text = situation
@@ -36,11 +35,12 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>)
                     ivSituation.setBackgroundResource(R.drawable.kesehatan)
                 }
             }
-            Glide.with(itemView.context)
-                .load(pic)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(ivContent)
-//            Log.e("test", "onBindViewHolder: $gambar | $nama")
+            if (pic != "null") {
+                Glide.with(itemView.context)
+                    .load(pic)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(ivContent)
+            }
         }
     }
 
@@ -53,4 +53,4 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>)
         var ivContent: ImageView = itemView.findViewById(R.id.iv_content)
         var ivSituation: ImageView = itemView.findViewById(R.id.iv_type_situation)
     }
-    }
+}

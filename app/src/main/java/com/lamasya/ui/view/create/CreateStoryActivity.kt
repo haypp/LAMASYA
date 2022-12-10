@@ -7,14 +7,14 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -24,9 +24,7 @@ import com.google.firebase.storage.StorageReference
 import com.lamasya.databinding.ActivityCreateStoryBinding
 import com.lamasya.ui.view.camera.CameraActivity
 import com.lamasya.ui.view.main.MainActivity
-import com.lamasya.util.logE
 import com.lamasya.util.rotateBitmap
-import com.lamasya.util.uriToFile
 import java.io.*
 
 @Suppress("DEPRECATION")
@@ -69,13 +67,15 @@ class CreateStoryActivity : AppCompatActivity() {
         }
         initVars()
         registerClickEvents()
-        getnama()
+        getData()
     }
 
-    private fun getnama() {
+    private fun getData() {
+        var pict = "null"
         val currentUID = MainActivity.CURRENT_UID
         firebaseFirestore.collection("detail_user").document(currentUID).get()
             .addOnSuccessListener { documents ->
+                pict = documents.getString("profile_pict").toString()
                 val fnama = documents.getString("first_name")
                 val lname = documents.getString("last_name")
                 binding.tvNama.text = "$fnama $lname"
@@ -83,11 +83,19 @@ class CreateStoryActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "Error getting documents: ", Toast.LENGTH_SHORT).show()
             }
+
+
+        if (pict != "null") {
+            Glide.with(this)
+                .load(pict)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.mealImageOrder)
+        }
     }
 
     private fun registerClickEvents() {
         binding.btnCamera.setOnClickListener { startCamera() }
-        binding.btnGallery.setOnClickListener {startGallery() }
+        binding.btnGallery.setOnClickListener { startGallery() }
         binding.btnUpload.setOnClickListener { uploadImage() }
     }
 
@@ -101,12 +109,12 @@ class CreateStoryActivity : AppCompatActivity() {
     }
 
     private fun startGallery() {
-            val intent = Intent()
-            intent.action = ACTION_GET_CONTENT
-            intent.type = "image/*"
-            val chooser = Intent.createChooser(intent, "Choose a Picture")
-            launcherIntentGallery.launch(chooser)
-        }
+        val intent = Intent()
+        intent.action = ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
+    }
 
 
     private fun uploadImage() {
@@ -129,12 +137,20 @@ class CreateStoryActivity : AppCompatActivity() {
                         )
                         firebaseFirestore.collection("stories")
                             .add(map).addOnCompleteListener { firestoreTask ->
-                            if (firestoreTask.isSuccessful){
-                                Toast.makeText(this, "Uploaded Successfully", Toast.LENGTH_SHORT).show()
-                            }else{
-                                Toast.makeText(this, firestoreTask.exception?.message, Toast.LENGTH_SHORT).show()
+                                if (firestoreTask.isSuccessful) {
+                                    Toast.makeText(
+                                        this,
+                                        "Uploaded Successfully",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else {
+                                    Toast.makeText(
+                                        this,
+                                        firestoreTask.exception?.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
-                        }
                     }
                 } else {
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
@@ -168,11 +184,13 @@ class CreateStoryActivity : AppCompatActivity() {
             binding.previewImageView.setImageURI(selectedImg)
         }
     }
+
     private fun initVars() {
         storageRef = FirebaseStorage.getInstance().reference.child("Images")
         firebaseFirestore = FirebaseFirestore.getInstance()
         firebaseauth = Firebase.auth
     }
+
     companion object {
         const val CAMERA_X_RESULT = 200
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)

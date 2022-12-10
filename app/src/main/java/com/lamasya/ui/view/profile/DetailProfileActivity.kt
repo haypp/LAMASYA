@@ -90,9 +90,9 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth,
 
     private fun addItem(profileResponse: LiveData<ProfileResponse>) {
         val dataProfile = profileResponse.value
-        if(dataProfile?.photo != null){
+        if(dataProfile?.profile_pict != "null"){
             Glide.with(this)
-                .load(dataProfile.photo)
+                .load(dataProfile?.profile_pict)
                 .circleCrop()
                 .into(binding.imvDetailInfoPhoto)
         }

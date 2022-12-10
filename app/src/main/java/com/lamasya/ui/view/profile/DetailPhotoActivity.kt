@@ -9,18 +9,18 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.lamasya.R
-import com.lamasya.databinding.ActivityDetailPhotoAcivityBinding
+import com.lamasya.databinding.ActivityDetailPhotoActivityBinding
 import com.lamasya.ui.view.main.MainActivity
 import com.lamasya.util.toast
 
 @Suppress("DEPRECATION")
 class DetailPhotoActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailPhotoAcivityBinding
+    private lateinit var binding: ActivityDetailPhotoActivityBinding
     private lateinit var remoteStorage: StorageReference
     private var firestore = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityDetailPhotoAcivityBinding.inflate(layoutInflater)
+        binding = ActivityDetailPhotoActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

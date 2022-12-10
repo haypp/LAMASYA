@@ -22,7 +22,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
 
-class ProfileFragment : Fragment(), ProfileAuth, SwipeRefreshLayout.OnRefreshListener  {
+class ProfileFragment : Fragment(), ProfileAuth, SwipeRefreshLayout.OnRefreshListener {
     private lateinit var binding: FragmentProfileBinding
     private val itemList = ArrayList<MenuProfileModel>()
 
@@ -53,9 +53,9 @@ class ProfileFragment : Fragment(), ProfileAuth, SwipeRefreshLayout.OnRefreshLis
 
     override fun onSuccess(profileResponse: LiveData<ProfileResponse>) {
         val dataProfile = profileResponse.value
-        if(dataProfile?.photo != null){
+        if (dataProfile?.profile_pict != "null") {
             Glide.with(this)
-                .load(dataProfile.photo)
+                .load(dataProfile?.profile_pict)
                 .circleCrop()
                 .into(binding.imvDetailPhoto)
         }

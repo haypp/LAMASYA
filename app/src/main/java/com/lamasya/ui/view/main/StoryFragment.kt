@@ -7,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.lamasya.data.remote.story.Storyresponse
 import com.lamasya.databinding.FragmentStoryBinding
 import com.lamasya.ui.adapter.StoryAdapter
 import com.lamasya.ui.view.create.CreateStoryActivity
-import com.lamasya.util.logE
 
 
 class StoryFragment : Fragment() {
