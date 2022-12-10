@@ -14,7 +14,6 @@ class ProfileViewModel : ViewModel() {
     private val mutableProfileResponse = MutableLiveData<ProfileResponse>()
     private val liveDataProfileResponse: LiveData<ProfileResponse> =
         mutableProfileResponse
-
     var profileAuth: ProfileAuth? = null
 
     fun getProfile(currentUID: String) = viewModelScope.launch {

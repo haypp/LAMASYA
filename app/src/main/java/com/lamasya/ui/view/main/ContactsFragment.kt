@@ -5,71 +5,76 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.lamasya.data.remote.contacts.ContactsResponse
 import com.lamasya.databinding.FragmentContactsBinding
 import com.lamasya.ui.adapter.ContactsAdapter
-import com.lamasya.ui.viewmodel.ContactsViewModel
 import com.lamasya.util.logE
 
 class ContactsFragment : Fragment() {
     private lateinit var binding: FragmentContactsBinding
     private val citemList = ArrayList<ContactsResponse>()
-    private var hideType = true
-    private val contactsVM: ContactsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentContactsBinding.inflate(inflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvMyProductItems.setHasFixedSize(true)
-//        showRecyclerList()
-        var paramC = "rumah_sakit"
-        addItems(paramC)
-        hideType = false
+        addItems(PARAMC)
+
         binding.btnRumahsakit.setOnClickListener {
-            paramC = "rumah_sakit"
-            hideType = false
-            addItems(paramC)
+            PARAMC = "rumah_sakit"
+            addItems(PARAMC)
         }
         binding.btnPemadam.setOnClickListener {
-            paramC = "polisi"
-            hideType = true
-            addItems(paramC)
+            PARAMC = "polisi"
+            addItems(PARAMC)
         }
         binding.btnPolisi.setOnClickListener {
-            paramC = "polisi"
-            hideType = true
-            addItems(paramC)
+            PARAMC = "polisi"
+            addItems(PARAMC)
         }
+
     }
 
     private fun addItems(paramC: String) {
         citemList.clear()
-        contactsVM.getRS(paramC)
-        contactsVM.dataRS.observe(viewLifecycleOwner) {
-            citemList.addAll(listOf(it))
-        }
-        showRecyclerList()
+        Firebase.firestore.collection(paramC).get()
+            .addOnSuccessListener {
+                context?.logE("itemV $paramC")
+                for (document in it.documents) {
+                    citemList.add(
+                        ContactsResponse(
+                            document.data!!["nama"].toString(),
+                            document.data!!["alamat"].toString(),
+                            document.data!!["no_telepon"].toString(),
+                            document.data!!["gambar"].toString(),
+                            document.data!!["link_maps"].toString(),
+                            document.data!!["jenis"].toString()
+                        )
+                    )
+                }
+                showRecyclerList()
+            }
     }
 
     private fun showRecyclerList() {
-        binding.rvMyProductItems.layoutManager = LinearLayoutManager(binding.root.context)
-        val listMenuAdapter = ContactsAdapter(citemList, hideType)
-        binding.rvMyProductItems.adapter = listMenuAdapter
-    }
-}
-
-private fun <E> ArrayList<E>.addAll(elements: List<E?>) {
-    for (element in elements) {
-        if (element != null) {
-            this.add(element)
+        binding.apply {
+            rvMyProductItems.layoutManager = LinearLayoutManager(binding.root.context)
+            val listMenuAdapter = ContactsAdapter(citemList)
+            rvMyProductItems.adapter = listMenuAdapter
+            rvMyProductItems.setHasFixedSize(true)
         }
+    }
+
+    companion object {
+        var PARAMC = "rumah_sakit"
     }
 }

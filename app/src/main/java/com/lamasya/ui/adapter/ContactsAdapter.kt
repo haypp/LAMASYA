@@ -11,10 +11,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.lamasya.R
 import com.lamasya.data.remote.contacts.ContactsResponse
-import com.lamasya.databinding.ItemCallBinding
 
-class ContactsAdapter(private val data: ArrayList<ContactsResponse>,
-    private val hideType: Boolean)
+class ContactsAdapter(private val data: ArrayList<ContactsResponse>)
     : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,19 +21,11 @@ class ContactsAdapter(private val data: ArrayList<ContactsResponse>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (nama, alamat, no_telepon, gambar, link_maps, jenis) = data[position]
+        val (nama, alamat, no_telepon, gambar, link_maps) = data[position]
         holder.apply {
             tvName.text = nama
             tvAddress.text = alamat
             tvCall.text = no_telepon
-            if (hideType) {
-                tvTypeRS.visibility = View.GONE
-                typeRS.visibility = View.GONE
-            } else {
-                tvTypeRS.visibility = View.VISIBLE
-                typeRS.visibility = View.VISIBLE
-                tvTypeRS.text = jenis
-            }
             Glide.with(itemView.context)
                 .load(gambar)
                 .transition(DrawableTransitionOptions.withCrossFade())
