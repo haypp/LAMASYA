@@ -47,7 +47,6 @@ class LoginActivity : AppCompatActivity() {
             signIn()
         }
         binding.btnSignInEmail.setOnClickListener {
-            loading.isLoading(true)
             getEmailPw()
         }
         binding.btnRegister.setOnClickListener {
@@ -63,10 +62,14 @@ class LoginActivity : AppCompatActivity() {
             val email = etEmail.text.toString()
             val password = etPassword.text.toString()
             if (email.isEmpty() || password.isEmpty() || password.length < 6) {
-                etEmail.error = getString(R.string.please_fill_field)
-                etPassword.error = getString(R.string.invalid_password)
-                etEmail.requestFocus()
+                if(email.isEmpty() ){
+                    etEmail.error =getString(R.string.please_fill_field)
+                }
+                if( password.isEmpty() || password.length < 6) {
+                    etPassword.error = getString(R.string.invalid_password)
+                }
             } else {
+                loading.isLoading(true)
                 signInEmail(email, password)
             }
         }

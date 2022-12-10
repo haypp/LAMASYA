@@ -34,7 +34,7 @@ class ContactsFragment : Fragment() {
             addItems(PARAMC)
         }
         binding.btnPemadam.setOnClickListener {
-            PARAMC = "polisi"
+            PARAMC = "pemadam_kebakaran"
             addItems(PARAMC)
         }
         binding.btnPolisi.setOnClickListener {
