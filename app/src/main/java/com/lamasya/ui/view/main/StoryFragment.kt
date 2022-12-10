@@ -23,7 +23,8 @@ import kotlin.concurrent.schedule
 class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var binding: FragmentStoryBinding
     private lateinit var firestore: FirebaseFirestore
-    private val storyList= ArrayList<Storyresponse>()
+    private val storyList = ArrayList<Storyresponse>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,53 +35,26 @@ class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onRefresh()
 
         binding.buttonCreate.setOnClickListener {
-            val intent = Intent (this@StoryFragment.requireContext(),CreateStoryActivity::class.java)
+            val intent =
+                Intent(this@StoryFragment.requireContext(), CreateStoryActivity::class.java)
             startActivity(intent)
         }
         binding.swpRefreshStory.setOnRefreshListener {
             onRefresh()
         }
     }
+
     override fun onResume() {
         super.onResume()
         storyList.clear()
+
         addItem()
     }
 
-    fun addItem() {
-        firestore = FirebaseFirestore.getInstance()
-        storyList.clear()
-        firestore.collection("stories").orderBy("created_at", Query.Direction.DESCENDING)
-            .get()
-            .addOnSuccessListener {
-                context?.logE("itemV 1")
-                for (document in it.documents) {
-                    storyList.add(
-                        Storyresponse(
-                            document.data!!["uid"].toString(),
-                            document.data!!["pic"].toString(),
-                            document.data!!["situation"].toString(),
-                            document.data!!["desc"].toString(),
-                            document.data!!["nama"].toString(),
-                            document.data!!["created_at"].toString(),
-                            document.data!!["profil_url"].toString()
-                        )
-                    )
-                context?.logE("itemV 2")
-                }
-                showRecyclerList()
-            }
-        }
 
-    private fun showRecyclerList() {
-        binding.rvStory.setHasFixedSize(true)
-        binding.rvStory.layoutManager = LinearLayoutManager(binding.root.context)
-        val storyAdapter = StoryAdapter(storyList)
-        binding.rvStory.adapter = storyAdapter
-        storyAdapter.notifyDataSetChanged()
-    }
 
     override fun onRefresh() {
         binding.apply {
@@ -91,5 +65,47 @@ class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             }
         }
     }
+
+
+    private fun addItem() {
+        firestore = FirebaseFirestore.getInstance()
+        storyList.clear()
+        firestore.collection("stories").orderBy("created_at", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener {
+                context?.logE("itemV 1")
+                for (document in it.documents) {
+                    firestore.collection("detail_user").document(document.data!!["uid"].toString())
+                        .get()
+                        .addOnSuccessListener { it ->
+                            val fName = it.data!!["first_name"].toString()
+                            val lName = it.data!!["last_name"].toString()
+                            val name = "$fName $lName"
+                            storyList.add(
+                                Storyresponse(
+                                    it.data!!["profile_pict"].toString(),
+                                    name,
+                                    document.data!!["situation"].toString(),
+                                    document.data!!["created_at"].toString(),
+                                    document.data!!["desc"].toString(),
+                                    document.data!!["pic"].toString(),
+                                )
+                            )
+                            showRecyclerList()
+                            context?.logE("itemV 2 $storyList")
+                        }
+                }
+            }
+    }
+
+
+    private fun showRecyclerList() {
+        binding.rvStory.setHasFixedSize(true)
+        binding.rvStory.layoutManager = LinearLayoutManager(binding.root.context)
+        val storyAdapter = StoryAdapter(storyList)
+        binding.rvStory.adapter = storyAdapter
+        storyAdapter.notifyDataSetChanged()
+    }
+
 
 }

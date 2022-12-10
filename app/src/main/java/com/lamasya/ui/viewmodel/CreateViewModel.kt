@@ -16,11 +16,9 @@ class CreateViewModel : ViewModel() {
 
     fun uploadStory(
         uid: String?,
-        desc: String,
         situation: String,
-        name: String,
-        imageUri: Uri?,
-        pict: String
+        desc: String,
+        imageUri: Uri?
     ) {
         storageRef = FirebaseStorage.getInstance().reference.child("Images/stories")
         firebaseFirestore = FirebaseFirestore.getInstance()
@@ -31,12 +29,10 @@ class CreateViewModel : ViewModel() {
                     storageRef.downloadUrl.addOnSuccessListener { uri ->
                         val map = hashMapOf(
                             "uid" to uid,
-                            "pic" to uri.toString(),
-                            "desc" to desc,
                             "situation" to situation,
-                            "nama" to name,
+                            "desc" to desc,
+                            "pic" to uri.toString(),
                             "created_at" to System.currentTimeMillis(),
-                            "profil_url" to pict
                         )
                         firebaseFirestore.collection("stories")
                             .add(map).addOnCompleteListener { firestoreTask ->

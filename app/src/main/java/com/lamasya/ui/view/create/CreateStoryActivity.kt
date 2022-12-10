@@ -83,9 +83,9 @@ class CreateStoryActivity : AppCompatActivity() {
         firebaseFirestore.collection("detail_user").document(currentUID).get()
             .addOnSuccessListener { documents ->
                 pict = documents.getString("profile_pict").toString()
-                val fnama = documents.getString("first_name")
-                val lname = documents.getString("last_name")
-                binding.tvNama.text = StringBuilder(fnama).append(" ").append(lname)
+                val fName = documents.getString("first_name")
+                val lName = documents.getString("last_name")
+                binding.tvNama.text = StringBuilder(fName.toString()).append(" ").append(lName)
 
                 if (pict != "null") {
                     Glide.with(this)
@@ -111,10 +111,9 @@ class CreateStoryActivity : AppCompatActivity() {
         val uid = firebaseauth.currentUser?.uid
         val desc = binding.edDescription.text.toString()
         val situation = binding.situation.selectedItem.toString()
-        val name = binding.tvNama.text.toString()
         if (imageUri != null) {
             loading.isLoading(true)
-            createVM.uploadStory(uid, desc, situation, name, imageUri,pict)
+            createVM.uploadStory(uid, situation, desc, imageUri)
             createVM.uploadStoryData.observe(
                 this,) {
                 if (it) {

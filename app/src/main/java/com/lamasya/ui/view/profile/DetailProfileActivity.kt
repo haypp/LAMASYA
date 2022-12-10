@@ -1,12 +1,9 @@
 package com.lamasya.ui.view.profile
 
-import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -23,7 +20,6 @@ import com.lamasya.util.LoadingDialog
 import com.lamasya.util.intent
 import com.lamasya.util.logE
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
 
 class DetailProfileActivity : AppCompatActivity(), ProfileAuth,
@@ -43,7 +39,7 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth,
 
         profileVM.profileAuth = this
         loading.isLoading(true)
-        getProfileData()
+        onRefresh()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.tittle_detail_profile)
@@ -54,7 +50,7 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth,
             }
 
             btnChangeProfile.setOnClickListener {
-                setPhotoProfile()
+                intent(DetailPhotoActivity::class.java)
             }
         }
     }
@@ -88,13 +84,6 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth,
         profileVM.getProfile(currentUID)
     }
 
-    private fun setPhotoProfile() {
-        val intent = Intent()
-        intent.action = Intent.ACTION_GET_CONTENT
-        intent.type = "image/*"
-        val chooser = Intent.createChooser(intent, "Choose a Picture")
-        launcherIntentGallery.launch(chooser)
-    }
 
     private fun addItem(profileResponse: LiveData<ProfileResponse>) {
         val dataProfile = profileResponse.value
@@ -139,20 +128,10 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth,
         }
     }
 
-    private val launcherIntentGallery = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val selectedImg: Uri = result.data?.data as Uri
-            IMAGE_URI = selectedImg
-            intent(DetailPhotoActivity::class.java)
-        }
-    }
 
     companion object {
         private val titleListItem =
             arrayOf("Nama Lengkap", "Email", "No Telephone", "Jenis Kelamin", "Umur")
-        lateinit var IMAGE_URI: Uri
     }
 
 }

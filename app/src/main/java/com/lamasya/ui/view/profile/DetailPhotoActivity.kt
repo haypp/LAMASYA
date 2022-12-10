@@ -1,9 +1,12 @@
 package com.lamasya.ui.view.profile
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -27,7 +30,7 @@ class DetailPhotoActivity : AppCompatActivity() {
 
         title = getString(R.string.tittle_detail_photo)
         remoteStorage = FirebaseStorage.getInstance().reference.child("Images/Profile/")
-        showImage()
+        getPhotoFromGalery()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -49,6 +52,24 @@ class DetailPhotoActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg: Uri = result.data?.data as Uri
+            IMAGE_URI = selectedImg
+            binding.imvDetailPhoto.setImageURI(selectedImg)
+        }
+    }
+
+    private fun getPhotoFromGalery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherIntentGallery.launch(chooser)
     }
 
     private fun updatePhotoProfile() {
@@ -76,11 +97,8 @@ class DetailPhotoActivity : AppCompatActivity() {
         }
     }
 
-    private fun showImage() {
-        binding.imvDetailPhoto.setImageURI(IMAGE_URI)
-    }
 
     companion object {
-        var IMAGE_URI = DetailProfileActivity.IMAGE_URI
+        lateinit var IMAGE_URI: Uri
     }
 }

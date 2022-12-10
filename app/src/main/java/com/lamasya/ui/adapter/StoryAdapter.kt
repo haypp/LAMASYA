@@ -1,5 +1,6 @@
 package com.lamasya.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +23,11 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (_, pic, situation, desc, nama,created_at,pp) = data[position]
+        val (pp, name, situation, created_at, desc, pict) = data[position]
+        Log.e(this@StoryAdapter.toString(), "onBindViewHolder: darta $data", )
         holder.apply {
-            tvName.text = nama
+
+            tvName.text = name
             tvSituation.text = situation
             tvDesc.text = desc
             when (situation) {
@@ -49,12 +52,19 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>) :
             }
 
             Glide.with(itemView.context)
-                .load(pic)
+                .load(pict)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(ivContent)
         }
     }
 
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
     override fun getItemCount(): Int = data.size
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
