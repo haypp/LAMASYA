@@ -35,6 +35,7 @@ class RegisterViewModel : ViewModel() {
 
     private fun saveDataFireStore(registerRequest: RegisterRequest) {
         val data = hashMapOf(
+            "profile_pict" to  null,
             "first_name" to registerRequest.first_name,
             "last_name" to registerRequest.last_name,
             "phone" to registerRequest.phone,

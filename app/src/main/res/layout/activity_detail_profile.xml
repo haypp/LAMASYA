@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/imv_detail_info_photo"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_margin="15dp"
             android:contentDescription="@string/photo_profile"
             android:src="@drawable/profile"
@@ -22,6 +22,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_camera_alt_24"
+            android:contentDescription="@string/tittle_change_photo"
+            app:layout_constraintBottom_toBottomOf="@id/imv_detail_info_photo"
+            app:layout_constraintEnd_toEndOf="@id/imv_detail_info_photo"
+            app:tint="@color/black"
+            android:id="@+id/btnChangeProfile"/>
         <TextView
             android:id="@+id/tv_info_desc"
             android:layout_width="match_parent"

@@ -55,7 +55,7 @@ class ChangeDetailProfileActivity : AppCompatActivity(), ProfileAuth {
                 return true
             }
         }
-        return true
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSuccess(profileResponse: LiveData<ProfileResponse>) {

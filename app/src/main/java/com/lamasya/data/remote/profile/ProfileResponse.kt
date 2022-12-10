@@ -7,6 +7,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ProfileResponse(
+    @SerializedName("photo")
+    var photo: String? = null,
+
     @SerializedName("first_name")
     var first_name: String,
 

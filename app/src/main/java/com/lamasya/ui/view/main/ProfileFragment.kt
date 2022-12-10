@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
 import com.lamasya.R
 import com.lamasya.data.model.MenuProfileModel
 import com.lamasya.data.remote.profile.ProfileResponse
@@ -51,6 +52,13 @@ class ProfileFragment : Fragment(), ProfileAuth, SwipeRefreshLayout.OnRefreshLis
     }
 
     override fun onSuccess(profileResponse: LiveData<ProfileResponse>) {
+        val dataProfile = profileResponse.value
+        if(dataProfile?.photo != null){
+            Glide.with(this)
+                .load(dataProfile.photo)
+                .circleCrop()
+                .into(binding.imvDetailPhoto)
+        }
         binding.tvDetailName.text =
             StringBuilder(profileResponse.value?.first_name.toString()).append(" ")
                 .append(profileResponse.value?.last_name.toString())

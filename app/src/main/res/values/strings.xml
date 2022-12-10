@@ -8,6 +8,7 @@
     <string name="tittle_detail_profile">Detail Profile</string>
     <string name="tittle_change_password">Ubah Password</string>
     <string name="tittle_save">Simpan</string>
+    <string name="tittle_detail_photo">Detail Foto</string>
 
     <!--    material-->
     <string name="welcome_to_lamasya">Selamat Datang di Lamasya</string>
@@ -81,6 +82,8 @@
     <string name="search_view_text">Search in All</string>
 
     <string name="photo_profile">ini adalah foto profile pribadi</string>
+    <string name="detail_photo_profile">ini adalah detail foto profile pribadi</string>
+
 
     <!-- Camera -->
     <string name="switchCamera">Ganti Kamera</string>
@@ -95,6 +98,7 @@
 
     <!-- notif -->
     <string name="update_success">Data berhasil diubah</string>
+    <string name="update_unsuccess">Data belum berhasil diubah</string>
 
     <string-array name="situation">
         <item>lalu lintas</item>
@@ -105,4 +109,5 @@
     <string name="rumah_sakit">Rumah Sakit</string>
     <string name="polisi">Polisi</string>
     <string name="damkar">Pemadam Kebakaran</string>
+    <string name="tittle_change_photo">Change photo profile</string>
 </resources>
