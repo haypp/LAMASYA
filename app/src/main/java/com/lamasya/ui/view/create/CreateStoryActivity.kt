@@ -71,26 +71,26 @@ class CreateStoryActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        var pict = "null"
         val currentUID = MainActivity.CURRENT_UID
         firebaseFirestore.collection("detail_user").document(currentUID).get()
             .addOnSuccessListener { documents ->
-                pict = documents.getString("profile_pict").toString()
+                val pict = documents.getString("profile_pict").toString()
                 val fnama = documents.getString("first_name")
                 val lname = documents.getString("last_name")
                 binding.tvNama.text = "$fnama $lname"
+
+                if (pict != "null") {
+                    Glide.with(this)
+                        .load(pict)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(binding.mealImageOrder)
+                }
             }
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "Error getting documents: ", Toast.LENGTH_SHORT).show()
             }
 
 
-        if (pict != "null") {
-            Glide.with(this)
-                .load(pict)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(binding.mealImageOrder)
-        }
     }
 
     private fun registerClickEvents() {
