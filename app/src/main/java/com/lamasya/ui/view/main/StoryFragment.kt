@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.lamasya.data.remote.story.Storyresponse
 import com.lamasya.databinding.FragmentStoryBinding
 import com.lamasya.ui.adapter.StoryAdapter
 import com.lamasya.ui.view.create.CreateStoryActivity
+import com.lamasya.util.logE
 
 
 class StoryFragment : Fragment() {
@@ -28,41 +30,51 @@ class StoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initVars()
-        addItem()
+//        addItem()
+//        storyList.clear()
+
         binding.buttonCreate.setOnClickListener {
             val intent = Intent (this@StoryFragment.requireContext(),CreateStoryActivity::class.java)
             startActivity(intent)
         }
     }
-
-    private fun initVars() {
-        binding.rvStory.setHasFixedSize(true)
-
+    override fun onResume() {
+        super.onResume()
+        storyList.clear()
+        addItem()
     }
 
-    private fun addItem() {
+    fun addItem() {
         firestore = FirebaseFirestore.getInstance()
         storyList.clear()
-        firestore.collection("stories").get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    val uid = document.getString("uid")
-                    val pic = document.getString("pic")
-                    val situation = document.getString("situation")
-                    val desc = document.getString("desc")
-                    val nama = document.getString("nama")
-                    val story = Storyresponse(uid, pic, situation, desc, nama)
-                    storyList.add(story)
+        firestore.collection("stories").orderBy("created_at", Query.Direction.DESCENDING)
+            .get()
+            .addOnSuccessListener {
+                context?.logE("itemV 1")
+                for (document in it.documents) {
+                    storyList.add(
+                        Storyresponse(
+                            document.data!!["uid"].toString(),
+                            document.data!!["pic"].toString(),
+                            document.data!!["situation"].toString(),
+                            document.data!!["desc"].toString(),
+                            document.data!!["nama"].toString(),
+                            document.data!!["created_at"].toString(),
+                            document.data!!["profil_url"].toString()
+                        )
+                    )
+                context?.logE("itemV 2")
                 }
                 showRecyclerList()
             }
         }
 
     private fun showRecyclerList() {
+        binding.rvStory.setHasFixedSize(true)
         binding.rvStory.layoutManager = LinearLayoutManager(binding.root.context)
         val storyAdapter = StoryAdapter(storyList)
         binding.rvStory.adapter = storyAdapter
+        storyAdapter.notifyDataSetChanged()
     }
 
 }

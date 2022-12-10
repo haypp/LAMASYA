@@ -50,11 +50,11 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginStart="26dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="26dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
             app:startIconDrawable="@drawable/ic_baseline_email_24">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -108,8 +108,9 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="15dp"
 
-            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnSignInEmail">
 
             <View
@@ -168,39 +169,17 @@
             app:layout_constraintStart_toEndOf="@+id/textView12"
             app:layout_constraintTop_toTopOf="@+id/textView12" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="270dp" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="522dp"
-            android:contentDescription="@string/google_login"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="522dp"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/btnsignIngoogle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
             android:layout_marginTop="12dp"
-            android:contentDescription="@drawable/google_button"
+            android:background="@drawable/google_button"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/ly_atau"
             app:layout_constraintStart_toStartOf="@+id/ly_atau"
             app:layout_constraintTop_toBottomOf="@+id/ly_atau" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="205dp" />
 
 
         <TextView

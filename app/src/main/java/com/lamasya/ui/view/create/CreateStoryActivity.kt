@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,16 +25,19 @@ import com.google.firebase.storage.StorageReference
 import com.lamasya.databinding.ActivityCreateStoryBinding
 import com.lamasya.ui.view.camera.CameraActivity
 import com.lamasya.ui.view.main.MainActivity
+import com.lamasya.ui.viewmodel.CreateViewModel
 import com.lamasya.util.rotateBitmap
 import java.io.*
 
 @Suppress("DEPRECATION")
 class CreateStoryActivity : AppCompatActivity() {
+    private lateinit var pict: String
     private lateinit var binding: ActivityCreateStoryBinding
     private lateinit var storageRef: StorageReference
     private lateinit var firebaseFirestore: FirebaseFirestore
     private lateinit var firebaseauth: FirebaseAuth
     private var imageUri: Uri? = null
+    private val createVM : CreateViewModel by viewModels()
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -74,7 +78,7 @@ class CreateStoryActivity : AppCompatActivity() {
         val currentUID = MainActivity.CURRENT_UID
         firebaseFirestore.collection("detail_user").document(currentUID).get()
             .addOnSuccessListener { documents ->
-                val pict = documents.getString("profile_pict").toString()
+                pict = documents.getString("profile_pict").toString()
                 val fnama = documents.getString("first_name")
                 val lname = documents.getString("last_name")
                 binding.tvNama.text = "$fnama $lname"
@@ -96,7 +100,31 @@ class CreateStoryActivity : AppCompatActivity() {
     private fun registerClickEvents() {
         binding.btnCamera.setOnClickListener { startCamera() }
         binding.btnGallery.setOnClickListener { startGallery() }
-        binding.btnUpload.setOnClickListener { uploadImage() }
+        binding.btnUpload.setOnClickListener { uploadImage2() }
+    }
+
+    private fun uploadImage2() {
+        val uid = firebaseauth.currentUser?.uid
+        val desc = binding.edDescription.text.toString()
+        val situation = binding.situation.selectedItem.toString()
+        val name = binding.tvNama.text.toString()
+        if (imageUri != null) {
+            binding.progressbarUpload.visibility = android.view.View.VISIBLE
+            createVM.uploadStory(uid, desc, situation, name, imageUri,pict)
+            createVM.uploadStoryData.observe(
+                this,) {
+                if (it) {
+                    Toast.makeText(this, "Upload Success", Toast.LENGTH_SHORT).show()
+                    finish()
+                    binding.progressbarUpload.visibility = android.view.View.GONE
+                } else {
+                    Toast.makeText(this, "Upload Failed", Toast.LENGTH_SHORT).show()
+                    binding.progressbarUpload.visibility = android.view.View.GONE
+                }
+            }
+        } else {
+            Toast.makeText(this, "Lampirkan Foto", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
@@ -117,7 +145,7 @@ class CreateStoryActivity : AppCompatActivity() {
     }
 
 
-    private fun uploadImage() {
+    private fun uploadImage(uid: String?, desc: String, situation: String, name: String) {
         val uid = firebaseauth.currentUser?.uid
         val desc = binding.edDescription.text.toString()
         val situation = binding.situation.selectedItem.toString()
@@ -189,6 +217,7 @@ class CreateStoryActivity : AppCompatActivity() {
         storageRef = FirebaseStorage.getInstance().reference.child("Images")
         firebaseFirestore = FirebaseFirestore.getInstance()
         firebaseauth = Firebase.auth
+        binding.progressbarUpload.visibility = android.view.View.GONE
     }
 
     companion object {

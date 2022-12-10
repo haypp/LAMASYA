@@ -10,6 +10,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.lamasya.R
 import com.lamasya.data.remote.story.Storyresponse
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class StoryAdapter(private val data: ArrayList<Storyresponse>) :
     RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
@@ -19,7 +22,7 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (_, pic, situation, desc, nama) = data[position]
+        val (_, pic, situation, desc, nama,created_at,pp) = data[position]
         holder.apply {
             tvName.text = nama
             tvSituation.text = situation
@@ -35,11 +38,18 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>) :
                     ivSituation.setBackgroundResource(R.drawable.kesehatan)
                 }
             }
+            val sdf = SimpleDateFormat("dd MMM,yyyy HH:mm")
+            val resultdate = Date(created_at!!.toLong())
+            tvTime.text = sdf.format(resultdate).toString()
             if (pic != "null") {
                 Glide.with(itemView.context)
                     .load(pic)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(ivContent)
+                Glide.with(itemView.context)
+                    .load(pp)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(ivProfile)
             }
         }
     }
@@ -52,5 +62,7 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>) :
         var tvDesc: TextView = itemView.findViewById(R.id.tv_desc)
         var ivContent: ImageView = itemView.findViewById(R.id.iv_content)
         var ivSituation: ImageView = itemView.findViewById(R.id.iv_type_situation)
+        var tvTime : TextView = itemView.findViewById(R.id.tv_time)
+        var ivProfile : ImageView = itemView.findViewById(R.id.iv_profile)
     }
 }

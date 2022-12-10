@@ -18,6 +18,7 @@ import com.lamasya.ui.adapter.ProfileMenuAdapter
 import com.lamasya.ui.auth.ProfileAuth
 import com.lamasya.ui.viewmodel.ProfileViewModel
 import com.lamasya.util.logE
+import com.lamasya.util.toast
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
@@ -96,9 +97,10 @@ class ProfileFragment : Fragment(), ProfileAuth, SwipeRefreshLayout.OnRefreshLis
     }
 
     private fun showRecyclerList() {
+        val loginID = profileVM.getSignInProvider()
         binding.apply {
             rvListMenuProfile.layoutManager = LinearLayoutManager(root.context)
-            val mListProfileAdapter = ProfileMenuAdapter(itemList)
+            val mListProfileAdapter = ProfileMenuAdapter(itemList,loginID)
             rvListMenuProfile.adapter = mListProfileAdapter
         }
     }
