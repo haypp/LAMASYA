@@ -1,11 +1,9 @@
 package com.lamasya.ui.viewmodel
 
-import android.net.Uri
 import androidx.lifecycle.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageReference
 import com.lamasya.data.remote.profile.ProfileRequest
 import com.lamasya.data.remote.profile.ProfileResponse
 import com.lamasya.ui.auth.ProfileAuth
