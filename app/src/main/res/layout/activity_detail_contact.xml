@@ -23,7 +23,8 @@
                 android:src="@drawable/rectangle_11"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/mainDesc"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -52,7 +53,8 @@
                     android:layout_marginTop="12dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_instansi"
-                    app:srcCompat="@drawable/ic_baseline_location_on_24" />
+                    app:srcCompat="@drawable/ic_baseline_location_on_24"
+                    android:contentDescription="@string/gambarmDesc"/>
 
                 <TextView
                     android:id="@+id/tv_address"
@@ -75,7 +77,8 @@
                     android:layout_marginTop="14dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView7"
-                    app:srcCompat="@drawable/ic_baseline_home_24" />
+                    app:srcCompat="@drawable/ic_baseline_home_24"
+                    android:contentDescription="@string/jenisDesc"/>
 
                 <TextView
                     android:id="@+id/tv_typeRS"
@@ -91,6 +94,7 @@
                     tools:ignore="SmallSp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
@@ -104,7 +108,8 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_maps"
-        app:srcCompat="@drawable/call" />
+        app:srcCompat="@drawable/call"
+        android:contentDescription="@string/callDesc"/>
 
     <ImageView
         android:id="@+id/btn_maps"
@@ -114,7 +119,8 @@
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/maps_float" />
+        app:srcCompat="@drawable/maps_float"
+        android:contentDescription="@string/mapsDesc"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,23 +14,21 @@
 
         <ImageView
             android:id="@+id/iv_content"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="119dp"
+            android:layout_height="119dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="12dp"
             android:contentDescription="@string/contentDesc"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/tv_instansi"
-            android:layout_width="wrap_content"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/nama_instansi"
             android:textSize="12sp"
@@ -46,11 +44,12 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/iv_content"
             app:layout_constraintTop_toBottomOf="@+id/tv_instansi"
-            app:srcCompat="@drawable/ic_baseline_location_on_24" />
+            app:srcCompat="@drawable/ic_baseline_location_on_24"
+            android:contentDescription="@string/iconMaps"/>
 
-       <TextView
+        <TextView
             android:id="@+id/tv_address"
-            android:layout_width="200dp"
+            android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/poppins_semi_bold"
@@ -111,14 +110,15 @@
             android:id="@+id/tv_timework"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="12dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/buka"
             android:textColor="#DD2C00"
             android:textSize="10sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_content"
             app:layout_constraintTop_toBottomOf="@id/tv_call"
             tools:ignore="SmallSp" />
