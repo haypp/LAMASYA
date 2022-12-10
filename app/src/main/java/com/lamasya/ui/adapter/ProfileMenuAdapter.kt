@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -15,9 +16,11 @@ import com.lamasya.ui.view.login.LoginActivity
 import com.lamasya.ui.view.profile.ChangePasswordActivity
 import com.lamasya.ui.view.profile.DetailProfileActivity
 import com.lamasya.util.intent
+import com.lamasya.util.toast
 
 
-class ProfileMenuAdapter(private val itemList: ArrayList<MenuProfileModel>) :
+class ProfileMenuAdapter(private val itemList: ArrayList<MenuProfileModel>,
+        private val loginID :String) :
     RecyclerView.Adapter<ProfileMenuAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -48,7 +51,11 @@ class ProfileMenuAdapter(private val itemList: ArrayList<MenuProfileModel>) :
                     context.intent(DetailProfileActivity::class.java)
                 }
                 1 -> {
-                    context.intent(ChangePasswordActivity::class.java)
+                    if (loginID == "google.com") {
+                        context?.toast("Anda login dengan Google, silahkan login ulang untuk mengganti password")
+                    }else {
+                        context.intent(ChangePasswordActivity::class.java)
+                    }
                 }
                 2 -> {
                     FirebaseAuth.getInstance().signOut()

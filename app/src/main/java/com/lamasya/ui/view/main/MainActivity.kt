@@ -9,6 +9,8 @@ import com.google.firebase.ktx.Firebase
 import com.lamasya.R
 import com.lamasya.databinding.ActivityMainBinding
 import com.lamasya.util.logE
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

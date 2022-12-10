@@ -16,4 +16,8 @@ data class Storyresponse(
     val desc: String?,
     @SerializedName("nama")
     val nama: String?,
+    @SerializedName("created_at")
+    val created_at: String?,
+    @SerializedName("profil_url")
+    val profil_url: String?
 ) : Parcelable
