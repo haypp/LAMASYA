@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="125dp"
+    android:layout_height="wrap_content"
     android:layout_margin="3dp"
     app:cardCornerRadius="8dp">
 
@@ -44,22 +44,20 @@
             android:layout_height="15dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:contentDescription="@string/locationDesc"
             app:layout_constraintStart_toEndOf="@+id/iv_content"
             app:layout_constraintTop_toBottomOf="@+id/tv_instansi"
             app:srcCompat="@drawable/ic_baseline_location_on_24" />
 
-        <TextView
+       <TextView
             android:id="@+id/tv_address"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/address"
             android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_address"
-            app:layout_constraintStart_toEndOf="@+id/iv_address"
-            app:layout_constraintTop_toTopOf="@+id/iv_address"
+            app:layout_constraintStart_toEndOf="@id/iv_address"
+            app:layout_constraintTop_toTopOf="@id/iv_address"
             tools:ignore="SmallSp" />
 
 
@@ -70,8 +68,8 @@
             android:layout_marginStart="9dp"
             android:layout_marginTop="4dp"
             android:contentDescription="@string/rsDesc"
-            app:layout_constraintStart_toEndOf="@+id/iv_content"
-            app:layout_constraintTop_toBottomOf="@+id/iv_address"
+            app:layout_constraintStart_toEndOf="@id/iv_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_address"
             app:srcCompat="@drawable/hospital_svgrepo_com" />
 
         <TextView
@@ -82,9 +80,8 @@
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/typeRs"
             android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_icon_rs"
-            app:layout_constraintStart_toEndOf="@+id/iv_icon_rs"
-            app:layout_constraintTop_toTopOf="@+id/iv_icon_rs"
+            app:layout_constraintStart_toEndOf="@id/iv_icon_rs"
+            app:layout_constraintTop_toTopOf="@id/iv_icon_rs"
             tools:ignore="SmallSp" />
 
         <ImageView
@@ -94,8 +91,8 @@
             android:layout_marginStart="9dp"
             android:layout_marginTop="4dp"
             android:contentDescription="@string/CallDesc"
-            app:layout_constraintStart_toEndOf="@+id/iv_content"
-            app:layout_constraintTop_toBottomOf="@+id/iv_icon_rs"
+            app:layout_constraintStart_toEndOf="@id/iv_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_typeRS"
             app:srcCompat="@drawable/phone_svgrepo_com" />
 
         <TextView
@@ -106,9 +103,8 @@
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/call"
             android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_call"
-            app:layout_constraintStart_toEndOf="@+id/iv_call"
-            app:layout_constraintTop_toTopOf="@+id/iv_call"
+            app:layout_constraintStart_toEndOf="@id/iv_call"
+            app:layout_constraintTop_toTopOf="@id/iv_call"
             tools:ignore="SmallSp" />
 
         <TextView
@@ -116,14 +112,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="7dp"
             android:fontFamily="@font/poppins_semi_bold"
             android:text="@string/buka"
             android:textColor="#DD2C00"
             android:textSize="10sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_content"
+            app:layout_constraintStart_toEndOf="@id/iv_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_call"
             tools:ignore="SmallSp" />
 
         <ImageView
@@ -132,9 +129,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="18dp"
             android:contentDescription="@string/doodDesc"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_timework"
+            app:layout_constraintBottom_toBottomOf="@id/tv_timework"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_timework"
+            app:layout_constraintTop_toTopOf="@id/tv_timework"
             app:srcCompat="@drawable/dood" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -19,6 +19,7 @@ import com.lamasya.ui.adapter.DetailProfileMenuAdapter
 import com.lamasya.ui.auth.ProfileAuth
 import com.lamasya.ui.view.main.MainActivity
 import com.lamasya.ui.viewmodel.ProfileViewModel
+import com.lamasya.util.LoadingDialog
 import com.lamasya.util.intent
 import com.lamasya.util.logE
 import java.util.*
@@ -33,6 +34,7 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth,
     private val profileVM: ProfileViewModel by viewModels()
     private val itemList = ArrayList<MenuDetailProfileModel>()
 
+    private val loading = LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +42,8 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth,
         setContentView(binding.root)
 
         profileVM.profileAuth = this
-        onRefresh()
+        loading.isLoading(true)
+        getProfileData()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = getString(R.string.tittle_detail_profile)
@@ -73,6 +76,11 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth,
                 getProfileData()
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getProfileData()
     }
 
     private fun getProfileData() {
@@ -123,6 +131,7 @@ class DetailProfileActivity : AppCompatActivity(), ProfileAuth,
     }
 
     private fun showRecyclerList() {
+        loading.isLoading(false)
         binding.apply {
             rvListDetailProfile.layoutManager = LinearLayoutManager(root.context)
             val mListDetailProfileAdapter = DetailProfileMenuAdapter(itemList)

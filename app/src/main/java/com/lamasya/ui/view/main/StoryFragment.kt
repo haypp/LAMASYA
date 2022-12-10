@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.lamasya.data.remote.story.Storyresponse
@@ -14,9 +15,12 @@ import com.lamasya.databinding.FragmentStoryBinding
 import com.lamasya.ui.adapter.StoryAdapter
 import com.lamasya.ui.view.create.CreateStoryActivity
 import com.lamasya.util.logE
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 
 
-class StoryFragment : Fragment() {
+class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var binding: FragmentStoryBinding
     private lateinit var firestore: FirebaseFirestore
     private val storyList= ArrayList<Storyresponse>()
@@ -30,12 +34,13 @@ class StoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        addItem()
-//        storyList.clear()
 
         binding.buttonCreate.setOnClickListener {
             val intent = Intent (this@StoryFragment.requireContext(),CreateStoryActivity::class.java)
             startActivity(intent)
+        }
+        binding.swpRefreshStory.setOnRefreshListener {
+            onRefresh()
         }
     }
     override fun onResume() {
@@ -75,6 +80,16 @@ class StoryFragment : Fragment() {
         val storyAdapter = StoryAdapter(storyList)
         binding.rvStory.adapter = storyAdapter
         storyAdapter.notifyDataSetChanged()
+    }
+
+    override fun onRefresh() {
+        binding.apply {
+            swpRefreshStory.isRefreshing = true
+            Timer().schedule(2000) {
+                swpRefreshStory.isRefreshing = false
+                onResume()
+            }
+        }
     }
 
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.lamasya.data.remote.contacts.ContactsResponse
 import com.lamasya.databinding.ActivityDetailContactBinding
@@ -12,11 +13,12 @@ import com.lamasya.databinding.ActivityDetailContactBinding
 class DetailContactActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailContactBinding
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailContactBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val itemView = intent.getParcelableExtra<ContactsResponse>("contact") as ContactsResponse
         Glide.with(applicationContext)
@@ -36,11 +38,17 @@ class DetailContactActivity : AppCompatActivity() {
         binding.btnMaps.setOnClickListener{
             val binding = itemView.link_maps
             val dialPhoneIntent = Intent(Intent.ACTION_VIEW, Uri.parse(binding))
-            intent.setPackage("com.google.android.apps.maps");
+            intent.setPackage("com.google.android.apps.maps")
             startActivity(dialPhoneIntent)
         }
 
 
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) this.finish()
+        return super.onOptionsItemSelected(item)
+    }
+
 
 }

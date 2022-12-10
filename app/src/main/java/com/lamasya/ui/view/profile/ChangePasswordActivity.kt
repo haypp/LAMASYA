@@ -8,11 +8,14 @@ import com.lamasya.R
 import com.lamasya.databinding.ActivityChangePasswordBinding
 import com.lamasya.ui.auth.PasswordAuth
 import com.lamasya.ui.viewmodel.ChangePasswordViewModel
+import com.lamasya.util.LoadingDialog
 import com.lamasya.util.toast
 
 class ChangePasswordActivity : AppCompatActivity(), PasswordAuth{
     private lateinit var binding: ActivityChangePasswordBinding
     private val changePasswordVM: ChangePasswordViewModel by viewModels()
+
+    private val loading = LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +33,12 @@ class ChangePasswordActivity : AppCompatActivity(), PasswordAuth{
     }
 
     override fun onSuccess(message: String) {
+        loading.isLoading(false)
         toast(message)
     }
 
     override fun onFailed(message: String) {
+        loading.isLoading(false)
         toast(message)
     }
 
@@ -68,6 +73,7 @@ class ChangePasswordActivity : AppCompatActivity(), PasswordAuth{
 
     private fun updatePassword(validForm: Boolean) {
         if(validForm){
+            loading.isLoading(true)
             NEW_PASSWORD = binding.etNewPasswordDetail.text.toString()
             changePasswordVM.setPassword(
                 CURRENT_PASSWORD,

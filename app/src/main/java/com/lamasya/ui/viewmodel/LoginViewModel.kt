@@ -1,6 +1,5 @@
 package com.lamasya.ui.viewmodel
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,15 +10,12 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.lamasya.data.remote.register.RegisterResponse
 
 
 class LoginViewModel : ViewModel() {
     private val firestore = Firebase.firestore
-    private lateinit var firebaseauth: FirebaseAuth
     private var _loginfirebase = MutableLiveData<FirebaseUser?>()
     val loginfirebase: LiveData<FirebaseUser?> = _loginfirebase
-    var _isRegistered = false
 
     fun loginEmail(email: String, password: String) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)

@@ -41,16 +41,17 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>) :
             val sdf = SimpleDateFormat("dd MMM,yyyy HH:mm")
             val resultdate = Date(created_at!!.toLong())
             tvTime.text = sdf.format(resultdate).toString()
-            if (pic != "null") {
-                Glide.with(itemView.context)
-                    .load(pic)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(ivContent)
+            if (pp != "null") {
                 Glide.with(itemView.context)
                     .load(pp)
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(ivProfile)
             }
+
+            Glide.with(itemView.context)
+                .load(pic)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(ivContent)
         }
     }
 

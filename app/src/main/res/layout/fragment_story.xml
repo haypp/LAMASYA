@@ -6,11 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.view.main.StoryFragment">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swp_refresh_story">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_margin="5dp"
             android:id="@+id/rv_story"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -31,5 +37,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </FrameLayout>

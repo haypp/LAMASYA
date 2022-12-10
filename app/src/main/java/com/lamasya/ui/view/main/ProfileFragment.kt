@@ -18,7 +18,6 @@ import com.lamasya.ui.adapter.ProfileMenuAdapter
 import com.lamasya.ui.auth.ProfileAuth
 import com.lamasya.ui.viewmodel.ProfileViewModel
 import com.lamasya.util.logE
-import com.lamasya.util.toast
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule

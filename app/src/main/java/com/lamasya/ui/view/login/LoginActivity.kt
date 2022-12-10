@@ -17,6 +17,7 @@ import com.lamasya.databinding.ActivityLoginBinding
 import com.lamasya.ui.view.main.MainActivity
 import com.lamasya.ui.view.register.RegisterActivity
 import com.lamasya.ui.viewmodel.LoginViewModel
+import com.lamasya.util.LoadingDialog
 import com.lamasya.util.intent
 import com.lamasya.util.toast
 
@@ -25,6 +26,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel : LoginViewModel by viewModels()
     private lateinit var googleSignInClient: GoogleSignInClient
+
+    private val loading = LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +47,7 @@ class LoginActivity : AppCompatActivity() {
             signIn()
         }
         binding.btnSignInEmail.setOnClickListener {
+            loading.isLoading(true)
             getEmailPw()
         }
         binding.btnRegister.setOnClickListener {
@@ -82,9 +86,11 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel.loginfirebase.observe(this) { user ->
                 Log.d("LoginActivity", "cekIsiLiveData: $user")
                 if (user != null) {
+                    loading.isLoading(false)
                     intent(MainActivity::class.java)
                     finish()
                 } else {
+                    loading.isLoading(false)
                     toast(getString(R.string.invalid_email_or_password))
                 }
             }

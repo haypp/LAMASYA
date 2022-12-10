@@ -16,6 +16,7 @@ import com.lamasya.databinding.ActivityRegisterBinding
 import com.lamasya.ui.auth.UserAuth
 import com.lamasya.ui.view.login.LoginActivity
 import com.lamasya.ui.viewmodel.RegisterViewModel
+import com.lamasya.util.LoadingDialog
 import com.lamasya.util.intent
 import com.lamasya.util.logE
 import com.lamasya.util.toast
@@ -25,6 +26,7 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
     private lateinit var auth: FirebaseAuth
 
     private val registerVM: RegisterViewModel by viewModels()
+    private val loading = LoadingDialog(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +39,7 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
         registerVM.userAuth = this
 
         binding.btnSignUpEmail.setOnClickListener {
+            loading.isLoading(true)
             getValue()
             registerUser()
         }
@@ -47,6 +50,7 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
     }
 
     override fun onSuccess(registerResponse: LiveData<RegisterResponse>) {
+        loading.isLoading(false)
         toast(registerResponse.value!!.message)
         intent(MainActivity::class.java)
         finish()
@@ -55,6 +59,7 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
     }
 
     override fun onFailure(registerResponse: LiveData<RegisterResponse>) {
+        loading.isLoading(false)
         toast(registerResponse.value!!.message)
     }
 

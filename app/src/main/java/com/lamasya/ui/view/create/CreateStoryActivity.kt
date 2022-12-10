@@ -26,6 +26,7 @@ import com.lamasya.databinding.ActivityCreateStoryBinding
 import com.lamasya.ui.view.camera.CameraActivity
 import com.lamasya.ui.view.main.MainActivity
 import com.lamasya.ui.viewmodel.CreateViewModel
+import com.lamasya.util.LoadingDialog
 import com.lamasya.util.rotateBitmap
 import java.io.*
 
@@ -38,6 +39,9 @@ class CreateStoryActivity : AppCompatActivity() {
     private lateinit var firebaseauth: FirebaseAuth
     private var imageUri: Uri? = null
     private val createVM : CreateViewModel by viewModels()
+
+
+    private val loading = LoadingDialog(this)
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -81,7 +85,7 @@ class CreateStoryActivity : AppCompatActivity() {
                 pict = documents.getString("profile_pict").toString()
                 val fnama = documents.getString("first_name")
                 val lname = documents.getString("last_name")
-                binding.tvNama.text = "$fnama $lname"
+                binding.tvNama.text = StringBuilder(fnama).append(" ").append(lname)
 
                 if (pict != "null") {
                     Glide.with(this)
@@ -109,17 +113,17 @@ class CreateStoryActivity : AppCompatActivity() {
         val situation = binding.situation.selectedItem.toString()
         val name = binding.tvNama.text.toString()
         if (imageUri != null) {
-            binding.progressbarUpload.visibility = android.view.View.VISIBLE
+            loading.isLoading(true)
             createVM.uploadStory(uid, desc, situation, name, imageUri,pict)
             createVM.uploadStoryData.observe(
                 this,) {
                 if (it) {
                     Toast.makeText(this, "Upload Success", Toast.LENGTH_SHORT).show()
                     finish()
-                    binding.progressbarUpload.visibility = android.view.View.GONE
+                    loading.isLoading(false)
                 } else {
                     Toast.makeText(this, "Upload Failed", Toast.LENGTH_SHORT).show()
-                    binding.progressbarUpload.visibility = android.view.View.GONE
+                    loading.isLoading(false)
                 }
             }
         } else {
@@ -142,49 +146,6 @@ class CreateStoryActivity : AppCompatActivity() {
         intent.type = "image/*"
         val chooser = Intent.createChooser(intent, "Choose a Picture")
         launcherIntentGallery.launch(chooser)
-    }
-
-
-    private fun uploadImage(uid: String?, desc: String, situation: String, name: String) {
-        val uid = firebaseauth.currentUser?.uid
-        val desc = binding.edDescription.text.toString()
-        val situation = binding.situation.selectedItem.toString()
-        val name = binding.tvNama.text.toString()
-
-        storageRef = storageRef.child(System.currentTimeMillis().toString())
-        imageUri?.let {
-            storageRef.putFile(it).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    storageRef.downloadUrl.addOnSuccessListener { uri ->
-                        val map = hashMapOf(
-                            "uid" to uid,
-                            "pic" to uri.toString(),
-                            "desc" to desc,
-                            "situation" to situation,
-                            "nama" to name
-                        )
-                        firebaseFirestore.collection("stories")
-                            .add(map).addOnCompleteListener { firestoreTask ->
-                                if (firestoreTask.isSuccessful) {
-                                    Toast.makeText(
-                                        this,
-                                        "Uploaded Successfully",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                } else {
-                                    Toast.makeText(
-                                        this,
-                                        firestoreTask.exception?.message,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-                            }
-                    }
-                } else {
-                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
     }
 
     private val launcherIntentCameraX = registerForActivityResult(
@@ -217,7 +178,6 @@ class CreateStoryActivity : AppCompatActivity() {
         storageRef = FirebaseStorage.getInstance().reference.child("Images")
         firebaseFirestore = FirebaseFirestore.getInstance()
         firebaseauth = Firebase.auth
-        binding.progressbarUpload.visibility = android.view.View.GONE
     }
 
     companion object {
