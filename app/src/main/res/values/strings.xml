@@ -110,4 +110,6 @@
     <string name="polisi">Polisi</string>
     <string name="damkar">Pemadam Kebakaran</string>
     <string name="tittle_change_photo">Change photo profile</string>
+    <string name="maps_tittle">ini link maps</string>
+    <string name="title_detail">Detail Instansi</string>
 </resources>
