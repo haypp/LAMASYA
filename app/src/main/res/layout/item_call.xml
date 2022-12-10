@@ -69,7 +69,7 @@
             android:contentDescription="@string/rsDesc"
             app:layout_constraintStart_toEndOf="@id/iv_content"
             app:layout_constraintTop_toBottomOf="@id/tv_address"
-            app:srcCompat="@drawable/hospital_svgrepo_com" />
+            app:srcCompat="@drawable/ic_baseline_home_24" />
 
         <TextView
             android:id="@+id/tv_typeRS"
