@@ -39,7 +39,8 @@
                 android:layout_marginHorizontal="5dp"
                 android:drawableLeft="@drawable/hospital_svgrepo_com__1_"
                 android:text="@string/rumah_sakit"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                tools:ignore="RtlHardcoded,SmallSp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPemadam"
@@ -49,7 +50,8 @@
                 android:layout_marginHorizontal="5dp"
                 android:drawableLeft="@drawable/firefighter_svgrepo_com__1_"
                 android:text="@string/damkar"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                tools:ignore="RtlHardcoded,SmallSp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPolisi"
@@ -59,7 +61,8 @@
                 android:layout_marginHorizontal="5dp"
                 android:drawableLeft="@drawable/police_svgrepo_com"
                 android:text="@string/polisi"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                tools:ignore="RtlHardcoded,SmallSp" />
         </LinearLayout>
     </HorizontalScrollView>
 

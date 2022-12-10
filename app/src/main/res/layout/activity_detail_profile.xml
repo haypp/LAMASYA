@@ -29,7 +29,7 @@
             android:contentDescription="@string/tittle_change_photo"
             app:layout_constraintBottom_toBottomOf="@id/imv_detail_info_photo"
             app:layout_constraintEnd_toEndOf="@id/imv_detail_info_photo"
-            app:tint="@color/black"
+            app:tint="@color/ic_launcher_new_background"
             android:id="@+id/btnChangeProfile"/>
         <TextView
             android:id="@+id/tv_info_desc"

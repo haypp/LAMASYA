@@ -24,7 +24,7 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val (pp, name, situation, created_at, desc, pict) = data[position]
-        Log.e(this@StoryAdapter.toString(), "onBindViewHolder: darta $data", )
+        Log.e(this@StoryAdapter.toString(), "onBindViewHolder: darta $data" )
         holder.apply {
 
             tvName.text = name
