@@ -1,47 +1,68 @@
 package com.lamasya.ui.adapter
 
+import android.app.Activity
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.lamasya.R
 import com.lamasya.data.remote.contacts.ContactsResponse
+import com.lamasya.databinding.ItemCallBinding
+import com.lamasya.ui.view.DetailContactActivity
 
 class ContactsAdapter(private val data: ArrayList<ContactsResponse>)
     : RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
+    inner class ViewHolder(binding: ItemCallBinding) : RecyclerView.ViewHolder(binding.root) {
+        private var photo = binding.ivContent
+        private var call = binding.tvCall
+        private var address = binding.tvAddress
+        private var name = binding.tvInstansi
+        private var jenis = binding.tvTypeRS
+
+        fun bind(contact: ContactsResponse) {
+            name.text = contact.nama
+            address.text = contact.alamat
+            call.text = contact.no_telepon
+            jenis.text = contact.jenis
+            Glide.with(itemView.context)
+                .load(contact.gambar)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .apply(RequestOptions.placeholderOf(R.drawable.icon_park_loading_one).error(R.drawable.ic_round_broken_image))
+                .into(photo)
+
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, DetailContactActivity::class.java)
+                intent.putExtra("contact", contact)
+                itemView.context.startActivity(
+                    intent,
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(itemView.context as Activity)
+                        .toBundle()
+                )
+            }
+
+
+        }
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_call, parent, false)
-        return ViewHolder(view)
+        val itemBinding =
+            ItemCallBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return ViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (nama, alamat, no_telepon, gambar, link_maps) = data[position]
-        holder.apply {
-            tvName.text = nama
-            tvAddress.text = alamat
-            tvCall.text = no_telepon
-            Glide.with(itemView.context)
-                .load(gambar)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(ivContent)
-            Log.e("test", "onBindViewHolder: $gambar | $nama")
-        }
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int = data.size
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var tvName: TextView = itemView.findViewById(R.id.tv_instansi)
-        var tvAddress: TextView = itemView.findViewById(R.id.tv_address)
-        var tvCall: TextView = itemView.findViewById(R.id.tv_call)
-        var tvTypeRS: TextView = itemView.findViewById(R.id.tv_typeRS)
-        var ivContent: ImageView = itemView.findViewById(R.id.iv_content)
-        var typeRS: ImageView = itemView.findViewById(R.id.iv_icon_rs)
-    }
 }
