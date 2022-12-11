@@ -41,14 +41,47 @@ class ContactsFragment : Fragment() {
             PARAMC = "polisi"
             addItems(PARAMC)
         }
+        binding.searchViewContacts.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    searchItems(PARAMC, newText)
+                }
+                return true
+            }
+        })
     }
-
     private fun addItems(paramC: String) {
         citemList.clear()
         Firebase.firestore.collection(paramC).get()
             .addOnSuccessListener {
                 context?.logE("itemV $paramC")
+                for (document in it.documents) {
+                    citemList.add(
+                        ContactsResponse(
+                            document.data!!["nama"].toString(),
+                            document.data!!["alamat"].toString(),
+                            document.data!!["no_telepon"].toString(),
+                            document.data!!["gambar"].toString(),
+                            document.data!!["link_maps"].toString(),
+                            document.data!!["jenis"].toString()
+                        )
+                    )
+                }
+                showRecyclerList()
+            }
+    }
+    private fun searchItems(paramC: String, query: String) {
+        citemList.clear()
+        Firebase.firestore.collection(paramC).orderBy("nama").startAt(query)
+            .endAt(query + "\uf8ff").limit(10)
+            .get()
+            .addOnSuccessListener {
+                context?.logE("itemV $paramC $query")
                 for (document in it.documents) {
                     citemList.add(
                         ContactsResponse(

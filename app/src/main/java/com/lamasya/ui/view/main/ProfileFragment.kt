@@ -96,10 +96,9 @@ class ProfileFragment : Fragment(), ProfileAuth, SwipeRefreshLayout.OnRefreshLis
     }
 
     private fun showRecyclerList() {
-        val loginID = profileVM.getSignInProvider()
         binding.apply {
             rvListMenuProfile.layoutManager = LinearLayoutManager(root.context)
-            val mListProfileAdapter = ProfileMenuAdapter(itemList,loginID)
+            val mListProfileAdapter = ProfileMenuAdapter(itemList)
             rvListMenuProfile.adapter = mListProfileAdapter
         }
     }

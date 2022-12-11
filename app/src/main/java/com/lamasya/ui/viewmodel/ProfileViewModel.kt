@@ -43,9 +43,4 @@ class ProfileViewModel : ViewModel() {
             "gender", profileRequest.gender
         )
     }
-    fun getSignInProvider() : String {
-       val string = FirebaseAuth.getInstance().currentUser?.providerData?.get(1)?.providerId
-        return string.toString()
-    }
-
 }

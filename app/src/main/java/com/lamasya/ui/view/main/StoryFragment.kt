@@ -104,7 +104,6 @@ class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         binding.rvStory.layoutManager = LinearLayoutManager(binding.root.context)
         val storyAdapter = StoryAdapter(storyList)
         binding.rvStory.adapter = storyAdapter
-        storyAdapter.notifyDataSetChanged()
     }
 
 

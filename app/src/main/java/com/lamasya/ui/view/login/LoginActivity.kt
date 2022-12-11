@@ -1,15 +1,8 @@
 package com.lamasya.ui.view.login
 
-import android.app.Activity
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.lamasya.R
@@ -25,7 +18,6 @@ import com.lamasya.util.toast
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel : LoginViewModel by viewModels()
-    private lateinit var googleSignInClient: GoogleSignInClient
 
     private val loading = LoadingDialog(this)
 
@@ -35,17 +27,6 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val gso = GoogleSignInOptions
-            .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        binding.btnsignIngoogle.setOnClickListener {
-            signIn()
-        }
         binding.btnSignInEmail.setOnClickListener {
             getEmailPw()
         }
@@ -87,7 +68,6 @@ class LoginActivity : AppCompatActivity() {
             finish()
         } else {
             loginViewModel.loginfirebase.observe(this) { user ->
-                Log.d("LoginActivity", "cekIsiLiveData: $user")
                 if (user != null) {
                     loading.isLoading(false)
                     intent(MainActivity::class.java)
@@ -100,28 +80,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-
-    private fun signIn() {
-        val signInIntent = googleSignInClient.signInIntent
-        resultLauncher.launch(signInIntent)
-    }
-
-
-    private var resultLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            try {
-                val account = task.getResult(ApiException::class.java)!!
-                loginViewModel.firebaseLoginGoogle(account.idToken!!)
-                cekIsiLiveData()
-            } catch (e: ApiException) {
-                Log.w("LoginActivity", "Google sign in failed", e)
-            }
-        }
-    }
-
     override fun onStart() {
         super.onStart()
         cekIsiLiveData()
