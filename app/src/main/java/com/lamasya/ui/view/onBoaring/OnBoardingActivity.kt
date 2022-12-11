@@ -2,6 +2,7 @@ package com.lamasya.ui.view.onBoaring
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import com.lamasya.R
 import com.lamasya.databinding.ActivityOnBoardingBinding
 import com.lamasya.ui.view.login.LoginActivity
@@ -15,6 +16,7 @@ class OnBoardingActivity : AppCompatActivity() {
         binding = ActivityOnBoardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         binding.btnNext.setOnClickListener {
             intent(LoginActivity::class.java)
