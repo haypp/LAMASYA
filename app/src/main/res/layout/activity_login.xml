@@ -114,61 +114,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnForgotPassword" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/ly_atau"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="15dp"
-
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnSignInEmail">
-
-            <View
-                android:layout_width="100dp"
-                android:layout_height="2dp"
-                android:background="@color/teal_700"
-                app:layout_constraintBottom_toBottomOf="@id/tv_login_or"
-                app:layout_constraintEnd_toStartOf="@id/tv_login_or"
-                app:layout_constraintTop_toTopOf="@id/tv_login_or" />
-
-            <TextView
-                android:id="@+id/tv_login_or"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="5dp"
-                android:text="@string/or_login_with"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <View
-                android:layout_width="100dp"
-                android:layout_height="2dp"
-                android:background="@color/teal_700"
-                app:layout_constraintBottom_toBottomOf="@id/tv_login_or"
-                app:layout_constraintStart_toEndOf="@id/tv_login_or"
-                app:layout_constraintTop_toTopOf="@id/tv_login_or" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:id="@+id/btnsignIngoogle"
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/google_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ly_atau" />
-
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/poppins"
             android:text="@string/does_not_have_account"
             android:textSize="12sp"
@@ -176,7 +126,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnsignIngoogle" />
+            app:layout_constraintTop_toBottomOf="@+id/btnSignInEmail" />
 
         <TextView
             android:id="@+id/btnRegister"

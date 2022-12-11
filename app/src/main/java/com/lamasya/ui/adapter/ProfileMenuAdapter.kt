@@ -18,9 +18,8 @@ import com.lamasya.util.intent
 import com.lamasya.util.toast
 
 
-class ProfileMenuAdapter(private val itemList: ArrayList<MenuProfileModel>,
-        private val loginID :String) :
-    RecyclerView.Adapter<ProfileMenuAdapter.ViewHolder>() {
+class ProfileMenuAdapter(private val itemList: ArrayList<MenuProfileModel>)
+    : RecyclerView.Adapter<ProfileMenuAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvTittle: TextView = itemView.findViewById(R.id.tv_item_menu_profile)
@@ -46,16 +45,8 @@ class ProfileMenuAdapter(private val itemList: ArrayList<MenuProfileModel>,
         viewHolder.itemView.setOnClickListener{
             val context = viewHolder.itemView.context
             when (position) {
-                0 -> {
-                    context.intent(DetailProfileActivity::class.java)
-                }
-                1 -> {
-                    if (loginID == "google.com") {
-                        context?.toast("Anda login dengan Google, silahkan login ulang untuk mengganti password")
-                    }else {
-                        context.intent(ChangePasswordActivity::class.java)
-                    }
-                }
+                0 -> context.intent(DetailProfileActivity::class.java)
+                1 -> context.intent(ChangePasswordActivity::class.java)
                 2 -> {
                     FirebaseAuth.getInstance().signOut()
                     context.intent(LoginActivity::class.java)

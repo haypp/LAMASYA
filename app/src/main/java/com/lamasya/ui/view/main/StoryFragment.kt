@@ -102,16 +102,14 @@ class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 }
             }
     }
-
-
     private fun showRecyclerList() {
         val storyAdapter = StoryAdapter(storyList)
+        binding.rvStory.adapter = storyAdapter
         binding.apply {
             rvStory.setHasFixedSize(true)
             rvStory.layoutManager = LinearLayoutManager(root.context)
             rvStory.itemAnimator = null
             rvStory.adapter = storyAdapter
-            storyAdapter.notifyDataSetChanged()
         }
     }
 

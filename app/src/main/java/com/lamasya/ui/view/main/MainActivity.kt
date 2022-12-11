@@ -25,15 +25,9 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(ContactsFragment())
         binding.bottomBar.onTabSelected = {
             when (it.id) {
-                R.id.home -> {
-                    replaceFragment(StoryFragment())
-                }
-                R.id.contact -> {
-                    replaceFragment(ContactsFragment())
-                }
-                R.id.profile -> {
-                    replaceFragment(ProfileFragment())
-                }
+                R.id.home -> replaceFragment(StoryFragment())
+                R.id.contact -> replaceFragment(ContactsFragment())
+                R.id.profile -> replaceFragment(ProfileFragment())
             }
         }
     }

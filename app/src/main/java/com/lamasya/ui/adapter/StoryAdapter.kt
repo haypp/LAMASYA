@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.lamasya.R
 import com.lamasya.data.remote.story.StoryResponse
 import com.lamasya.ui.view.story.DetailStoryActivity
@@ -42,13 +43,14 @@ class StoryAdapter(private val data: ArrayList<StoryResponse>) :
                     ivSituation.setBackgroundResource(R.drawable.kesehatan)
                 }
             }
-            val sdf = SimpleDateFormat("dd MMM,yyyy HH:mm")
+            val sdf = SimpleDateFormat("EEE dd MMM yyyy HH:mm")
             val resultdate = Date(created_at!!.toLong())
             tvTime.text = sdf.format(resultdate).toString()
             if (pp != "null") {
                 Glide.with(itemView.context)
                     .load(pp)
                     .transition(DrawableTransitionOptions.withCrossFade())
+                    .apply(RequestOptions.placeholderOf(R.drawable.icon_park_loading_one).error(R.drawable.ic_round_broken_image))
                     .into(ivProfile)
             }
 
