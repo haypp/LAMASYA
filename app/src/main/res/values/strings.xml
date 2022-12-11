@@ -116,4 +116,17 @@
     <string name="tittle_change_photo">Change photo profile</string>
     <string name="maps_tittle">ini link maps</string>
     <string name="title_detail">Detail Instansi</string>
+    <string name="take_photo">ini adalah Gambar untuk mengambil gambar</string>
+    <string name="switchDesc">ini adalah tombol untuk memutar kamera</string>
+    <string name="noPhoto">tidak ada photo</string>
+    <string name="mainDesc">ini adalah gambar utama</string>
+    <string name="callDesc">ini adalah tombol untuk menelepon</string>
+    <string name="mapsDesc">ini adalah gambar untuk menuju maps</string>
+    <string name="gambarmDesc">ini adalah gambar maps</string>
+    <string name="jenisDesc">ini adalah image jenis</string>
+    <string name="appName">LAMASYA</string>
+    <string name="onBoardingDesc">Sebuah aplikasi informasi di saat terjadi kejadian gawat darurat</string>
+    <string name="logoLamasya">ini adalah logo lamasya</string>
+    <string name="statusBtn">ini adalah tombol untuk membuat status</string>
+    <string name="iconMaps">ini adalah icon maps</string>
 </resources>
