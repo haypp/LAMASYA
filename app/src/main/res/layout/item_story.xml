@@ -12,31 +12,39 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_profile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/profile"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="2dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_username"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/story_item_body"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="@string/Nama_orang"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/iv_profile"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/profile"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/Nama_orang"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/iv_profile"
+                app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_time"
@@ -52,56 +60,92 @@
             app:layout_constraintTop_toTopOf="@+id/tv_username"
             tools:ignore="SmallSp" />
 
-        <ImageView
-            android:id="@+id/iv_type_situation"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
-            android:contentDescription="@string/typeDesc"
-            app:layout_constraintStart_toEndOf="@+id/iv_profile"
-            app:layout_constraintTop_toBottomOf="@+id/tv_username"
-            app:srcCompat="@drawable/lalu_lintas" />
+            <ImageView
+                android:id="@+id/iv_type_situation"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:contentDescription="@string/typeDesc"
+                app:layout_constraintStart_toEndOf="@+id/iv_profile"
+                app:layout_constraintTop_toBottomOf="@+id/tv_username"
+                app:srcCompat="@drawable/lalu_lintas" />
 
-        <TextView
-            android:id="@+id/type_situation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/type_situation"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_type_situation"
-            app:layout_constraintStart_toEndOf="@+id/iv_type_situation"
-            app:layout_constraintTop_toTopOf="@+id/iv_type_situation"
-            tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/type_situation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/type_situation"
+                android:textSize="8sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_type_situation"
+                app:layout_constraintStart_toEndOf="@+id/iv_type_situation"
+                app:layout_constraintTop_toTopOf="@+id/iv_type_situation"
+                tools:ignore="SmallSp" />
 
-        <TextView
-            android:id="@+id/tv_desc"
+            <TextView
+                android:id="@+id/tv_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:text="@string/desc"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/iv_profile"
+                app:layout_constraintTop_toBottomOf="@id/iv_profile" />
+
+            <ImageView
+                android:id="@+id/iv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="@string/contentDesc"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_desc"
+                app:srcCompat="@drawable/rectangle_11" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/story_item_line"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="12dp"
-            android:text="@string/desc"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/iv_profile"
-            app:layout_constraintTop_toBottomOf="@id/iv_profile" />
-
-        <ImageView
-            android:id="@+id/iv_content"
-            android:layout_width="380dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:contentDescription="@string/contentDesc"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_desc"
-            app:srcCompat="@drawable/rectangle_11" />
+            app:layout_constraintTop_toBottomOf="@id/story_item_body" />
 
+            <ImageView
+                android:id="@+id/imv_story_commment"
+                android:contentDescription="@string/tittle_comment"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:src="@drawable/ic_outline_mode_comment_24"
+                app:layout_constraintTop_toBottomOf="@id/story_item_line"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_story_comment_item"
+                />
+
+            <TextView
+                android:id="@+id/tv_story_comment_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tittle_comment"
+                android:textColor="@color/gray"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/tv_story_comment_item"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/imv_story_commment"
+                app:layout_constraintBottom_toBottomOf="@id/imv_story_commment"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

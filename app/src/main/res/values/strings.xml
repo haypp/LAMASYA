@@ -9,6 +9,7 @@
     <string name="tittle_change_password">Ubah Password</string>
     <string name="tittle_save">Simpan</string>
     <string name="tittle_detail_photo">Detail Foto</string>
+    <string name="tittle_comment">Komentar</string>
 
     <!--    material-->
     <string name="welcome_to_lamasya">Selamat Datang di Lamasya</string>
@@ -48,6 +49,9 @@
     <string name="email_not_found">Email tidak terdaftar</string>
     <string name="forgot_password">Lupa Password</string>
     <string name="register">Daftar</string>
+    <string name="tittle_send">Kirim</string>
+    <string name="write_a_comment">Tulis komentar</string>
+    <string name="comment_success">Komentar terkirim</string>
 
     <string name="createTittle">Buat Akun</string>
     <string name="createTitleDesc">Dapatkan fitur terbaik LAMASYA dengan membuat akun</string>
