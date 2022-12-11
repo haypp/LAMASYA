@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.lamasya.R
 import com.lamasya.data.remote.story.CommentResponse
 import com.lamasya.data.remote.story.DetailStoryResponse
@@ -127,7 +128,7 @@ class DetailStoryActivity : AppCompatActivity(), DetailStoryAuth {
         val storyId = intent.getStringExtra(EXTRA_STORY_ID).toString()
 
         FirebaseFirestore.getInstance().collection("stories").document(storyId)
-            .collection("comments").get().addOnSuccessListener {
+            .collection("comments").orderBy("created_at", Query.Direction.DESCENDING).get().addOnSuccessListener {
                 for (document in it.documents) {
                     val commentUID = document.data!!["user_id"].toString()
                     FirebaseFirestore.getInstance().collection("detail_user")

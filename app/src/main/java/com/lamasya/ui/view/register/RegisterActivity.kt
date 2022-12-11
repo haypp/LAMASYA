@@ -39,7 +39,6 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
         registerVM.userAuth = this
 
         binding.btnSignUpEmail.setOnClickListener {
-            loading.isLoading(true)
             getValue()
             registerUser()
         }
@@ -105,6 +104,7 @@ class RegisterActivity : AppCompatActivity(), UserAuth {
     private fun createAccount(validForm: Boolean) {
         logE("ara gender $GENDER")
         if(validForm){
+            loading.isLoading(true)
             registerVM.register(
                 RegisterRequest(
                     FNAME,
