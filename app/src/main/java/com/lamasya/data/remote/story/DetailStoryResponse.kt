@@ -5,11 +5,15 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Storyresponse(
-    @SerializedName("profil_url")
-    val profil_url: String?,
-    @SerializedName("nama")
-    val nama: String?,
+data class DetailStoryResponse(
+    @SerializedName("story_id")
+    val story_id: String?,
+    @SerializedName("author_id")
+    val author_id: String?,
+    @SerializedName("profile_url")
+    val profile_url: String?,
+    @SerializedName("name")
+    val name: String?,
     @SerializedName("situation")
     val situation: String?,
     @SerializedName("created_at")
@@ -17,5 +21,7 @@ data class Storyresponse(
     @SerializedName("desc")
     val desc: String?,
     @SerializedName("pic")
-    val pic: String?
+    val pic: String?,
+    @SerializedName("Comment")
+    val Comment: ArrayList<CommentResponse>? = null,
 ) : Parcelable

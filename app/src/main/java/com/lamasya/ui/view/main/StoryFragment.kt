@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.lamasya.data.remote.story.Storyresponse
+import com.lamasya.data.remote.story.StoryResponse
 import com.lamasya.databinding.FragmentStoryBinding
 import com.lamasya.ui.adapter.StoryAdapter
 import com.lamasya.ui.view.create.CreateStoryActivity
@@ -23,7 +23,7 @@ import kotlin.concurrent.schedule
 class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var binding: FragmentStoryBinding
     private lateinit var firestore: FirebaseFirestore
-    private val storyList = ArrayList<Storyresponse>()
+    private val storyList = ArrayList<StoryResponse>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +48,7 @@ class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onResume() {
+        binding.rvStory.setHasFixedSize(true)
         super.onResume()
         storyList.clear()
 
@@ -63,6 +64,7 @@ class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                 swpRefreshStory.isRefreshing = false
                 onResume()
             }
+
         }
     }
 
@@ -81,8 +83,11 @@ class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                             val fName = it.data!!["first_name"].toString()
                             val lName = it.data!!["last_name"].toString()
                             val name = "$fName $lName"
+                            val storyID = document.id
                             storyList.add(
-                                Storyresponse(
+                                StoryResponse(
+                                    storyID,
+                                    document.data!!["uid"].toString(),
                                     it.data!!["profile_pict"].toString(),
                                     name,
                                     document.data!!["situation"].toString(),
@@ -92,7 +97,7 @@ class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
                                 )
                             )
                             showRecyclerList()
-                            context?.logE("itemV 2 $storyList")
+                            context?.logE("getStory itemV 2 $storyID")
                         }
                 }
             }
@@ -100,11 +105,14 @@ class StoryFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
     private fun showRecyclerList() {
-        binding.rvStory.setHasFixedSize(true)
-        binding.rvStory.layoutManager = LinearLayoutManager(binding.root.context)
         val storyAdapter = StoryAdapter(storyList)
-        binding.rvStory.adapter = storyAdapter
-        storyAdapter.notifyDataSetChanged()
+        binding.apply {
+            rvStory.setHasFixedSize(true)
+            rvStory.layoutManager = LinearLayoutManager(root.context)
+            rvStory.itemAnimator = null
+            rvStory.adapter = storyAdapter
+            storyAdapter.notifyDataSetChanged()
+        }
     }
 
 

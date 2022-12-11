@@ -1,5 +1,6 @@
 package com.lamasya.ui.adapter
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.lamasya.R
-import com.lamasya.data.remote.story.Storyresponse
+import com.lamasya.data.remote.story.StoryResponse
+import com.lamasya.ui.view.story.DetailStoryActivity
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
-class StoryAdapter(private val data: ArrayList<Storyresponse>) :
+class StoryAdapter(private val data: ArrayList<StoryResponse>) :
     RecyclerView.Adapter<StoryAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_story, parent, false)
@@ -23,8 +24,8 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (pp, name, situation, created_at, desc, pict) = data[position]
-        Log.e(this@StoryAdapter.toString(), "onBindViewHolder: darta $data", )
+        val (story_id, author_id, pp, name, situation, created_at, desc, pict) = data[position]
+        Log.e(this@StoryAdapter.toString(), "get Story: darta $story_id $name")
         holder.apply {
 
             tvName.text = name
@@ -55,6 +56,16 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>) :
                 .load(pict)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(ivContent)
+
+            holder.itemView.setOnClickListener {
+                Log.e(this@StoryAdapter.toString(), "getStory: darta aa $story_id")
+                Log.e(this@StoryAdapter.toString(), "getStory: profile aa $author_id")
+                val mContext = holder.itemView.context
+                val move = Intent(mContext, DetailStoryActivity::class.java)
+                move.putExtra(DetailStoryActivity.EXTRA_STORY_ID, story_id.toString())
+                move.putExtra(DetailStoryActivity.EXTRA_AUTHOR_ID, author_id.toString())
+                mContext.startActivity(move)
+            }
         }
     }
 
@@ -75,5 +86,6 @@ class StoryAdapter(private val data: ArrayList<Storyresponse>) :
         var ivSituation: ImageView = itemView.findViewById(R.id.iv_type_situation)
         var tvTime : TextView = itemView.findViewById(R.id.tv_time)
         var ivProfile : ImageView = itemView.findViewById(R.id.iv_profile)
+
     }
 }
